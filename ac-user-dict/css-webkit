@@ -1,0 +1,83 @@
+
+// https://developer.mozilla.org/ja/docs/Web/CSS/Reference/Webkit_Extensions
+
+//  [A]
+
+-webkit-animation
+-webkit-animation-delay
+-webkit-animation-direction
+-webkit-animation-duration
+-webkit-animation-fill-mode
+-webkit-animation-iteration-count
+-webkit-animation-name
+-webkit-animation-play-state
+-webkit-animation-timing-function
+
+//  [B]
+
+-webkit-backface-visibility
+-webkit-border-image
+
+//  [C D E]
+
+-webkit-column-count
+-webkit-column-gap
+-webkit-column-width
+-webkit-column-rule
+-webkit-column-rule-width
+-webkit-column-rule-style
+-webkit-column-rule-color
+-webkit-columns
+-webkit-column-span
+
+//  [F]
+
+-webkit-font-feature-settings
+-webkit-font-kerning
+-webkit-font-size-delta
+-webkit-font-variant-ligatures
+
+//  [G]
+
+-webkit-grid-column
+-webkit-grid-row
+
+//  [H-O]
+
+-webkit-hyphens
+
+//  [M]
+
+-webkit-mask
+-webkit-mask-clip
+-webkit-mask-composite
+-webkit-mask-image
+-webkit-mask-origin
+-webkit-mask-position
+-webkit-mask-repeat
+-webkit-mask-size
+
+//  [P]
+
+-webkit-perspective
+-webkit-perspective-origin
+
+//  [Q-Z]
+
+-webkit-region-fragment
+-webkit-shape-outside
+-webkit-text-emphasis
+-webkit-text-emphasis-color
+-webkit-text-emphasis-position
+-webkit-text-emphasis-style
+-webkit-transform
+-webkit-transform-origin
+-webkit-transform-style
+-webkit-transition
+-webkit-transition-delay
+-webkit-transition-duration
+-webkit-transition-property
+-webkit-transition-timing-function
+-epub-word-break
+-epub-writing-mode
+
