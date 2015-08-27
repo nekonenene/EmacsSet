@@ -1941,7 +1941,7 @@ completion menu. This workaround stops that annoying behavior."
                            (and (local-variable-p 'ac-word-index buffer)
                                 (cdr (buffer-local-value 'ac-word-index buffer))))
            into candidates
-           finally return ;; (delete-dups candidates)
+           finally return (delete-dups candidates) ;; (delete-dups candidates) はコメントアウトすべし、と http://fukuyama.co/emacs-auto-complete にて
 	   ))
 
 (ac-define-source words-in-buffer
