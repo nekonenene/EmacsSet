@@ -83,6 +83,31 @@
  '(web-mode-html-attr-value-face ((t (:foreground "light salmon"))))
  '(web-mode-html-tag-face ((t (:foreground "light sea green" :weight bold)))))
 
+;; auto-complete のための設定
+(setq web-mode-ac-sources-alist
+      '(
+	("html" . (;ac-source-words-in-buffer
+		   ac-source-abbrev
+		   ac-source-files-in-current-dir
+		   ac-source-html-sakura-dict
+		   ))
+	("css"  . (;ac-source-words-in-buffer
+		   ac-source-abbrev
+		   ac-source-files-in-current-dir
+		   ac-source-css-include3-dict
+		   ac-source-css-webkit-dict  
+		   ac-source-css-mozilla-dict ; prefix `x.'
+		   ac-source-css-property
+		   ))
+	("php"  . (;ac-source-words-in-buffer
+		   ac-source-abbrev
+		   ac-source-files-in-current-dir
+		   ac-source-php-sakura-dict
+		   `$.'ac-source-html-sakura-dict ;; prefix `$.' これを付けることで、phpタグの外でしかhtmlの候補が出ない
+		   ))
+	))
+
+
 (provide 'web-mode-my-setting)
 
 ;; end
