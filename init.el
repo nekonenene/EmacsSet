@@ -668,8 +668,10 @@
 (global-set-key (kbd "<C-S-tab>") 'tabbar-backward-tab)
 (global-set-key [f7]              'tabbar-backward-tab)
 
-;; F8キーで shell を開く
-(global-set-key [f8] 'shell)
+;; バッファを閉じる Close Buffer
+(global-set-key (kbd "C-c b") 'kill-buffer)
+(global-set-key (kbd "M-RET") 'kill-buffer) ; Alt + Enter
+(global-set-key [f8]          'kill-buffer)
 
 ;; コピー (デフォの M-w も可能なまま)
 (define-key global-map (kbd "C-S-w") 'copy-region-as-kill)
@@ -704,6 +706,12 @@
 
 ;; 横（水平）に2画面
 (global-set-key (kbd "C-x C-2") 'split-window-right)
+
+;; バッファーを読み込みなおす
+(global-set-key [f5] 'revert-buffer)
+
+;; shell を開く
+(global-set-key (kbd "M-s h") 'shell)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
