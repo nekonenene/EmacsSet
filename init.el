@@ -312,6 +312,12 @@
 ;; 文字サイズ
 (set-face-attribute 'linum nil :height 0.75)
 
+;; 文字を折り返さない t =yes, nil =no
+;; (setq-default truncate-lines t)
+
+;; 折り返す
+(setq-default word-wrap t)
+
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ screen - hiwin                                                ;;;
@@ -743,7 +749,13 @@ ac-source-abbrev
 ;; emacs-lisp
 (add-to-list 'auto-mode-alist '(".el$'"      . emacs-lisp-mode))
 
+;; .h は c-mode でなく c++-mode で
+(add-to-list 'auto-mode-alist '("\\.h\\'"   . c++-mode))
+
+;;;;;;; ^^^ 以上はデフォルトで存在する mode なので require は不要 ^^^ ;;;;;;;
+
 ;; web-mode
+(require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'"      . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'"  . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[gj]sp\\'"     . web-mode))
@@ -758,31 +770,35 @@ ac-source-abbrev
 (require 'web-mode-my-setting)
 
 ;; js2-mode
+(require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'"          . js2-mode))
 
 ;; json-mode
+(require 'json-mode)
 (add-to-list 'auto-mode-alist '("\\.json\\'"        . json-mode))
 
 ;; csv-mode
+(require 'csv-mode)
 (add-to-list 'auto-mode-alist '("\\.csv\\'"         . csv-mode))
-
+  
 ;; gitignore
+(require 'gitignore-mode)
 (add-to-list 'auto-mode-alist '("\\.gitignore\\'"   . gitignore-mode))
 
 ;; gitconfig
+(require 'gitconfig-mode)
 (add-to-list 'auto-mode-alist '("\\.gitconfig\\'"   . gitconfig-mode))
 
 
 ;; Windows Power Shell mode
+(require 'powershell-mode)
 (autoload 'powershell-mode "powershell-mode" "A editing mode for Microsoft PowerShell." t)
 (add-to-list 'auto-mode-alist '("\\.ps1\\'" . powershell-mode))
 
 ;; lua
+(require 'lua-mode)
 (add-to-list 'auto-mode-alist '("\\.lua\\'"      . lua-mode))
 (add-to-list 'auto-mode-alist '("\\(.anm\\|.scn\\|.tra\\|.cam\\|.obj\\)\\'"      . lua-mode))
-
-;; .h は c-mode でなく c++-mode で
-(add-to-list 'auto-mode-alist '("\\.h\\'"   . c++-mode))
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
