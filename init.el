@@ -740,10 +740,6 @@ ac-source-abbrev
 ;;;;;;  modeの設定  ;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;:;;;;;;
 
-;; lua
-(add-to-list 'auto-mode-alist '("\\.lua\\'"      . lua-mode))
-(add-to-list 'auto-mode-alist '("\\(.anm\\|.scn\\|.tra\\|.cam\\|.obj\\)\\'"      . lua-mode))
-
 ;; emacs-lisp
 (add-to-list 'auto-mode-alist '(".el$'"      . emacs-lisp-mode))
 
@@ -780,6 +776,13 @@ ac-source-abbrev
 ;; Windows Power Shell mode
 (autoload 'powershell-mode "powershell-mode" "A editing mode for Microsoft PowerShell." t)
 (add-to-list 'auto-mode-alist '("\\.ps1\\'" . powershell-mode))
+
+;; lua
+(add-to-list 'auto-mode-alist '("\\.lua\\'"      . lua-mode))
+(add-to-list 'auto-mode-alist '("\\(.anm\\|.scn\\|.tra\\|.cam\\|.obj\\)\\'"      . lua-mode))
+
+;; .h は c-mode でなく c++-mode で
+(add-to-list 'auto-mode-alist '("\\.h\\'"   . c++-mode))
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
