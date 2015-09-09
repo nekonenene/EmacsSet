@@ -320,7 +320,7 @@ CSV mode provides the following specific keyboard key bindings:
          (`(,(or (pred consp) (pred stringp)) . ,_)
           `(,@mode-line-position ,csv-mode-line-format))
          (_ `("" ,mode-line-position ,csv-mode-line-format))))
-  (set (make-local-variable 'truncate-lines) t)
+  (set (make-local-variable 'truncate-lines) nil) ;; on Word Wrap
   ;; Enable or disable `csv-field-index-mode' (could probably do this
   ;; a bit more efficiently):
   (csv-field-index-mode (symbol-value 'csv-field-index-mode)))
