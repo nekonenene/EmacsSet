@@ -1,0 +1,209 @@
+// http://www.w3schools.com/jsref/default.asp より取得
+// 使った正規表現 : Devas で「行単位で検索」のオプションは外して以下を実行
+// ^[ ]*<tr>\s*<td>([^\n]*)</td> -> \1@
+// .*[^@]$ ->
+// ^\n ->  
+// <[^>]*>@? ->
+// @ ->  
+
+window.addEventListener()
+console.log()
+
+// Array
+constructor
+length
+prototype
+concat()
+indexOf()
+join()
+lastIndexOf()
+pop()
+push()
+reverse()
+shift()
+slice()
+sort()
+splice()
+toString()
+unshift()
+valueOf()
+
+// Date
+constructor
+prototype
+getDate()
+getDay()
+getFullYear()
+getMonth()
+getSeconds()
+getYear()
+parse()
+setDate()
+setFullYear()
+setMonth()
+setSeconds()
+setYear()
+toDateString()
+toString()
+toTimeString()
+toUTCString()
+UTC()
+valueOf()
+
+// Global
+Infinity
+NaN
+undefined
+decodeURI()
+decodeURIComponent()
+encodeURI()
+encodeURIComponent()
+escape()
+eval()
+isFinite()
+isNaN()
+Number()
+parseFloat()
+parseInt()
+String()
+unescape()
+
+// Math
+Math
+Math.E
+Math.LN2
+Math.LN10
+Math.LOG2E
+Math.LOG10E
+Math.PI
+Math.SQRT1_2
+Math.SQRT2
+Math.abs()
+Math.acos()
+Math.asin()
+Math.atan()
+Math.atan2()
+Math.ceil()
+Math.cos()
+Math.exp()
+Math.floor()
+Math.log()
+Math.max()
+Math.min()
+Math.pow(base, p)
+Math.random()
+Math.round()
+Math.sin()
+Math.sqrt()
+Math.tan()
+
+E
+LN2
+LN10
+LOG2E
+LOG10E
+PI
+SQRT1_2
+SQRT2
+abs()
+acos()
+asin()
+atan()
+atan2()
+ceil()
+cos()
+exp()
+floor()
+log()
+max()
+min()
+pow(base, p)
+random()
+round()
+sin()
+sqrt()
+tan()
+
+// Number
+constructor
+MAX_VALUE
+MIN_VALUE
+NEGATIVE_INFINITY
+NaN
+POSITIVE_INFINITY
+prototype
+toExponential()
+toPrecision()
+toString()
+valueOf()
+
+// RegExp
+i
+g
+constructor
+global
+ignoreCase
+source
+compile()
+exec()
+test()
+toString()
+
+// String
+constructor
+length
+prototype
+charAt()
+charCodeAt()
+concat()
+fromCharCode()
+indexOf()
+lastIndexOf()
+localeCompare()
+match()
+replace()
+search()
+slice()
+split()
+substr()
+substring()
+toLocaleLowerCase()
+toLocaleUpperCase()
+toLowerCase()
+toString()
+toUpperCase()
+trim()
+valueOf()
+anchor()
+big()
+blink()
+bold()
+fixed()
+fontcolor()
+fontsize()
+italics()
+link()
+small()
+strike()
+sub()
+sup()
+
+// Statements
+break ;
+continue ;
+debugger
+do{}
+for()
+for(var .. in ..)
+function()
+if()
+else{}
+else if{}
+return
+switch(..){ case .. : break ;}
+throw
+try{}
+catch(){}
+finally{}
+var 
+while()
