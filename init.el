@@ -380,7 +380,7 @@
 (setq migemo-options '("-q" "--emacs"))
 
 (defvar migemo-dictionary nil)
-(setq migemo-dictionary "/usr/local/share/migemo/utf-8/migemo-dict")
+(setq migemo-dictionary "C:/emacs/cmigemo-win32/dict/utf-8/migemo-dict")
 
 (defvar migemo-user-dictionary nil)
 

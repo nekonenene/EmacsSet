@@ -12,7 +12,11 @@
   (save-restriction
     (narrow-to-region (point) (- (point) 2))
     (if (re-search-backward "()" nil t)
-        (forward-char))))
+        (forward-char))
+    (if (re-search-backward "{}" nil t)
+        (forward-char))
+
+    ))
 
 ;; 直前の文字を区別して辞書を使用する - 何か1文字+ドットの後の場合に補完する
 (defun ac-js-dot-prefix ()
@@ -30,7 +34,7 @@
 ;;; 辞書1 (underscore.js)
 ;; 色設定
 (defface ac-underscore-js-candidate-face
-  '((t (:background "#730CE8" :foreground "#eeeeee")))
+  '((t (:background "#998822" :foreground "#eeeeee")))
   "Face for underscore.js candidates."
   :group 'auto-complete)
 ;; 情報源に辞書ファイルを指定
@@ -51,7 +55,7 @@
 ;;; 辞書2 (jquery)
 ;; 色設定
 (defface ac-jquery-candidate-face
-  '((t (:background "#1f679a" :foreground "#eeeeee")))
+  '((t (:background "#998822" :foreground "#eeeeee")))
   "Face for jquery candidates."
   :group 'auto-complete)
 ;; 情報源に辞書ファイルを指定
@@ -94,7 +98,7 @@
       (match-beginning 1)))
 ;; 色設定
 (defface ac-jquery-selector-candidate-face
-  '((t (:background "#1B919A" :foreground "#eeeeee")))
+  '((t (:background "#998822" :foreground "#eeeeee")))
   "Face for jquery selector candidates."
   :group 'auto-complete)
 ;; 情報源に辞書ファイルを指定
@@ -110,35 +114,6 @@
     (symbol . "jQuery selector")
     ))
 
-;; 使用する辞書・情報源を選択
-(defun ac-js-mode-setup ()
-  (setq ac-sources
-        '(
-          ac-source-abbrev
-          ac-source-words-in-same-mode-buffers
-          ;; ac-source-yasnippet
-          ac-source-filename
-          ;; 優先順位で並べる (prefixを指定すると排他的になる; x.に$.が含まれる)
-
-	  ;; とりあえず jQuery 今は使わないのでコメントアウト
-	  ;; ac-source-jquery-method-dict2  ; prefix `$.'
-          ;; ac-source-jquery-method-dict1  ; prefix `x.'
-          ;; ac-source-underscore-js-dict   ; prefix `x.'
-          ;; ac-source-jquery-selector-dict ; prefix `x:'
-          )))
-;; メジャーモードに反映させる
-(add-hook 'js-mode-hook 'ac-js-mode-setup)
-(add-hook 'js2-mode-hook 'ac-js-mode-setup)
-
-;; 辞書間で重複するものが削除されるので
-;; ~/.emacs.d/elisp/auto-complete/auto-complete.el L1052 (delete-dups candidates) をコメントアウト
-
-;; ac-disable-facesの初期値は
-;; (font-lock-comment-face font-lock-string-face font-lock-doc-face)
-;; font-lock-string-faceがあるとクオートで囲まれた部分"..."で
-;; auto-completeが反応しなくなり、セレクタを補完できないので次のように
-(setq ac-disable-faces '(font-lock-comment-face font-lock-doc-face))
-
 
 ;;;;  HTML, CSS, PHP のための auto-complete ;;;;
 
@@ -151,7 +126,6 @@
 ;; 情報源に辞書ファイルを指定
 (defvar ac-css-include3-cache
   (ac-file-dictionary (concat ac-user-dict-dir "css-include3")))
-;; 辞書1の設定
 (defvar ac-source-css-include3-dict
   '((candidates . ac-css-include3-cache) ;; 候補の情報源 これ以下はオプション
     (candidate-face . ac-css-include3-candidate-face) ;; 候補の色設定
@@ -169,7 +143,6 @@
 ;; 情報源に辞書ファイルを指定
 (defvar ac-css-webkit-cache
   (ac-file-dictionary (concat ac-user-dict-dir "css-webkit")))
-;; 辞書1の設定
 (defvar ac-source-css-webkit-dict
   '((candidates . ac-css-webkit-cache) ;; 候補の情報源 これ以下はオプション
     (candidate-face . ac-css-webkit-candidate-face) ;; 候補の色設定
@@ -187,7 +160,6 @@
 ;; 情報源に辞書ファイルを指定
 (defvar ac-css-mozilla-cache
   (ac-file-dictionary (concat ac-user-dict-dir "css-mozilla")))
-;; 辞書1の設定
 (defvar ac-source-css-mozilla-dict
   '((candidates . ac-css-mozilla-cache) ;; 候補の情報源 これ以下はオプション
     (candidate-face . ac-css-mozilla-candidate-face) ;; 候補の色設定
@@ -206,7 +178,6 @@
 ;; 情報源に辞書ファイルを指定
 (defvar ac-html-sakura-cache
   (ac-file-dictionary (concat ac-user-dict-dir "html-sakura")))
-;; 辞書1の設定
 (defvar ac-source-html-sakura-dict
   '((candidates . ac-html-sakura-cache) ;; 候補の情報源 これ以下はオプション
     (candidate-face . ac-html-sakura-candidate-face) ;; 候補の色設定
@@ -225,7 +196,6 @@
 ;; 情報源に辞書ファイルを指定
 (defvar ac-php-sakura-cache
   (ac-file-dictionary (concat ac-user-dict-dir "php-sakura")))
-;; 辞書1の設定
 (defvar ac-source-php-sakura-dict
   '((candidates . ac-php-sakura-cache) ;; 候補の情報源 これ以下はオプション
     (candidate-face . ac-php-sakura-candidate-face) ;; 候補の色設定
@@ -234,6 +204,124 @@
     (symbol . "PHP") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
     ))
 
+
+;;;;  JavaScript のための auto-complete ;;;;
+
+;;; 辞書5 (JavaScript)
+;; 色設定
+(defface ac-JS_mydict-candidate-face
+  '((t (:background "#ffcc33" :foreground "#220")))
+  "Face for JS_mydict candidates."
+  :group 'auto-complete)
+;; 情報源に辞書ファイルを指定
+(defvar ac-JS_mydict-cache
+  (ac-file-dictionary (concat ac-user-dict-dir "JS_mydict")))
+(defvar ac-source-JS_mydict-dict
+  '((candidates . ac-JS_mydict-cache) ;; 候補の情報源 これ以下はオプション
+    (candidate-face . ac-JS_mydict-candidate-face) ;; 候補の色設定
+    (selection-face . ac-my-selection-face) ;; 選択中の色設定
+    (action . ac-go-into-braces-action) ;; 補完後の動作
+    (symbol . "JS") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+    ))
+
+
+;;; 辞書6 (JavaScript BOM)
+;; 色設定
+(defface ac-JS_BOM_mydict-candidate-face
+  '((t (:background "#ffcc33" :foreground "#220")))
+  "Face for JS_BOM_mydict candidates."
+  :group 'auto-complete)
+;; 情報源に辞書ファイルを指定
+(defvar ac-JS_BOM_mydict-cache
+  (ac-file-dictionary (concat ac-user-dict-dir "JS_BOM_mydict")))
+(defvar ac-source-JS_BOM_mydict-dict
+  '((candidates . ac-JS_BOM_mydict-cache) ;; 候補の情報源 これ以下はオプション
+    (candidate-face . ac-JS_BOM_mydict-candidate-face) ;; 候補の色設定
+    (selection-face . ac-my-selection-face) ;; 選択中の色設定
+    (action . ac-go-into-braces-action) ;; 補完後の動作
+    (symbol . "JS_BOM") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+    ))
+
+
+;;; 辞書7 (JavaScript)
+;; 色設定
+(defface ac-JS_DOM_mydict-candidate-face
+  '((t (:background "#ffcc33" :foreground "#220")))
+  "Face for JS_DOM_mydict candidates."
+  :group 'auto-complete)
+;; 情報源に辞書ファイルを指定
+(defvar ac-JS_DOM_mydict-cache
+  (ac-file-dictionary (concat ac-user-dict-dir "JS_DOM_mydict")))
+(defvar ac-source-JS_DOM_mydict-dict
+  '((candidates . ac-JS_DOM_mydict-cache) ;; 候補の情報源 これ以下はオプション
+    (candidate-face . ac-JS_DOM_mydict-candidate-face) ;; 候補の色設定
+    (selection-face . ac-my-selection-face) ;; 選択中の色設定
+    (action . ac-go-into-braces-action) ;; 補完後の動作
+    (symbol . "JS_DOM") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+    ))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;; web-mode : auto-complete のための設定 ;;;;
+(setq web-mode-ac-sources-alist
+      '(
+	("html" . (;ac-source-words-in-buffer
+		   ac-source-abbrev
+		   ac-source-files-in-current-dir
+		   ac-source-html-sakura-dict
+		   ))
+	("css"  . (;ac-source-words-in-buffer
+		   ac-source-abbrev
+		   ac-source-files-in-current-dir
+		   ac-source-css-include3-dict
+		   ac-source-css-webkit-dict  
+		   ac-source-css-mozilla-dict ; prefix `x.'
+		   ac-source-css-property
+		   ))
+	("php"  . (;ac-source-words-in-buffer
+		   ac-source-abbrev
+		   ac-source-files-in-current-dir
+		   ac-source-php-sakura-dict
+		   `$.'ac-source-html-sakura-dict ;; prefix `$.' これを付けることで、phpタグの外でしかhtmlの候補が出ない
+		   ))
+	))
+
+
+;;;; web-mode : auto-complete のための設定 ;;;;
+(defun ac-js-mode-setup ()
+  (setq ac-sources
+        '(
+          ac-source-abbrev
+          ac-source-words-in-same-mode-buffers
+          ac-source-filename
+	  ac-source-JS_mydict-dict
+	  ac-source-JS_BOM_mydict-dict
+	  ac-source-JS_DOM_mydict-dict
+
+	  `$.'ac-source-css-include3-dict
+	  
+          ;; 優先順位で並べる (prefixを指定すると排他的になる; x.に$.が含まれる)
+	  ;; とりあえず jQuery 今は使わないのでコメントアウト
+	  ;; ac-source-jquery-method-dict2  ; prefix `$.'
+          ;; ac-source-jquery-method-dict1  ; prefix `x.'
+          ;; ac-source-underscore-js-dict   ; prefix `x.'
+          ;; ac-source-jquery-selector-dict ; prefix `x:'
+          ;; ac-source-yasnippet
+          )))
+;; メジャーモードに反映させる
+(add-hook 'js-mode-hook 'ac-js-mode-setup)
+(add-hook 'js2-mode-hook 'ac-js-mode-setup)
+
+;; 辞書間で重複するものが削除されるので
+;; ~/.emacs.d/elisp/auto-complete/auto-complete.el L1052 (delete-dups candidates) をコメントアウト
+
+;; ac-disable-facesの初期値は
+;; (font-lock-comment-face font-lock-string-face font-lock-doc-face)
+;; font-lock-string-faceがあるとクオートで囲まれた部分"..."で
+;; auto-completeが反応しなくなり、セレクタを補完できないので次のように
+(setq ac-disable-faces '(font-lock-comment-face font-lock-doc-face))
 
 
 (provide 'ac-user-dict-import)
