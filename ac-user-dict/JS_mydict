@@ -34,16 +34,46 @@ prototype
 getDate()
 getDay()
 getFullYear()
+getHours()
+getMilliseconds()
+getMinutes()
 getMonth()
 getSeconds()
+getTime()
+getTimezoneOffset()
+getUTCDate()
+getUTCDay()
+getUTCFullYear()
+getUTCHours()
+getUTCMilliseconds()
+getUTCMinutes()
+getUTCMonth()
+getUTCSeconds()
 getYear()
 parse()
 setDate()
 setFullYear()
+setHours()
+setMilliseconds()
+setMinutes()
 setMonth()
 setSeconds()
+setTime()
+setUTCDate()
+setUTCFullYear()
+setUTCHours()
+setUTCMilliseconds()
+setUTCMinutes()
+setUTCMonth()
+setUTCSeconds()
 setYear()
 toDateString()
+toGMTString()
+toISOString()
+toJSON()
+toLocaleDateString()
+toLocaleTimeString()
+toLocaleString()
 toString()
 toTimeString()
 toUTCString()
@@ -62,12 +92,7 @@ escape()
 eval()
 isFinite()
 isNaN()
-String()
 Number()
-Array()
-Object()
-Date()
-RegExp()
 parseFloat()
 parseInt()
 String()
@@ -138,18 +163,18 @@ NaN
 POSITIVE_INFINITY
 prototype
 toExponential()
+toFixed()
 toPrecision()
 toString()
 valueOf()
 
 // RegExp
-i
-g
 constructor
 global
 ignoreCase
+lastIndex
+multiline
 source
-compile()
 exec()
 test()
 toString()
@@ -179,6 +204,8 @@ toString()
 toUpperCase()
 trim()
 valueOf()
+
+// 一部のブラウザでは動かないので使用注意
 anchor()
 big()
 blink()
@@ -203,7 +230,7 @@ for(var .. in ..)
 function()
 if()
 else{}
-else if()
+else if{}
 return
 switch(..){ case .. : break ;}
 throw
