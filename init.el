@@ -32,7 +32,6 @@
   (normal-top-level-add-subdirs-to-load-path)
   )
 
-
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ language - coding system                                      ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -600,12 +599,12 @@
 (load "dabbrev-ja")  ; 日本語の補完を拾いすぎないように改善
 (require 'dabbrev-highlight)  ; どこから補完してきたのか、単語をハイライト
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; addrev の設定  ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;(setq addrev-file-name "~/.emacs.d/abbrev_defs") ;; ここ以外指定できないっぽい
 ;(setq save-abbrevs t)
-
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -642,17 +641,24 @@
 ;;; @ visual-regexp-steroids              追加コンテンツ            ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-(require 'visual-regexp-steroids)
-(setq vr/engine 'python)
+(defvar emacs-root
+  (eval-when-compile
+    '(
+      (require 'visual-regexp-steroids)
+      )))
+;; 上記のように書かないと `regexp-string' 由来のコンパイル警告を吐く
+
+(setq vr/engine 'python) ; 'python, 'pcre2el, or 'emacs
 ;; python が インストールされてない環境では、上１行をコメントアウト、下２行をコメント解除
 ;; (setq vr/engine 'pcre2el)
 ;; (require 'pcre2el)
 
-;; multiple-cursors を使っている場合は下１行をコメント解除
+;; multiple-cursors ( https://github.com/magnars/multiple-cursors.el ) を使っている場合は下１行をコメント解除
 ; (global-set-key (kbd "C-c m") 'vr/mc-mark)
-;; 普段の 'query-replace-regexp を visual-regexp-steroids に
-(global-set-key (kbd "C-x C-r") 'vr/query-replace)
-(global-set-key (kbd "C-S-x C-S-r") 'vr/replace)
+;; 普段の 'query-replace-regexp を visual-regexp に
+(define-key global-map (kbd "C-x C-r") 'vr/query-replace)
+(define-key global-map (kbd "C-S-x C-S-r") 'vr/replace)
+
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -677,6 +683,7 @@
 		    (global-set-key [mouse-3] 'bingalls-edit-menu)
 		    )
   )
+
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; ★ 俺キーバインド     key-bind  keybind                         ;;;
@@ -834,7 +841,7 @@ ac-source-abbrev
 
 ;; lua
 (require 'lua-mode)
-(add-to-list 'auto-mode-alist '("\\.lua\\'"      . lua-mode))
+(add-to-list 'auto-mode-alist '("\\.lua\\'"        . lua-mode))
 (add-to-list 'auto-mode-alist '("\\(.anm\\|.scn\\|.tra\\|.cam\\|.obj\\)\\'"      . lua-mode))
 
 
