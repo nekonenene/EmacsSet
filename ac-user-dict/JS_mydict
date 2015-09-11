@@ -62,7 +62,12 @@ escape()
 eval()
 isFinite()
 isNaN()
+String()
 Number()
+Array()
+Object()
+Date()
+RegExp()
 parseFloat()
 parseInt()
 String()
@@ -198,7 +203,7 @@ for(var .. in ..)
 function()
 if()
 else{}
-else if{}
+else if()
 return
 switch(..){ case .. : break ;}
 throw

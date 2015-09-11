@@ -377,25 +377,25 @@
 ;;;   https://github.com/emacs-jp/migemo                            ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-(require 'migemo)
+;; (require 'migemo)
 
-(defvar migemo-command nil)
-(setq migemo-command "cmigemo")
+;; (defvar migemo-command nil)
+;; (setq migemo-command "cmigemo")
 
-(defvar migemo-options nil)
-(setq migemo-options '("-q" "--emacs"))
+;; (defvar migemo-options nil)
+;; (setq migemo-options '("-q" "--emacs"))
 
-(defvar migemo-dictionary nil)
-(setq migemo-dictionary "C:/emacs/cmigemo-win32/dict/utf-8/migemo-dict")
+;; (defvar migemo-dictionary nil)
+;; (setq migemo-dictionary "C:/emacs/cmigemo-win32/dict/utf-8/migemo-dict")
 
-(defvar migemo-user-dictionary nil)
+;; (defvar migemo-user-dictionary nil)
 
-(defvar migemo-regex-dictionary nil)
+;; (defvar migemo-regex-dictionary nil)
 
-(defvar migemo-coding-system nil)
-(setq migemo-coding-system 'utf-8-unix)
+;; (defvar migemo-coding-system nil)
+;; (setq migemo-coding-system 'utf-8-unix)
 
-(load-library "migemo")
+;; (load-library "migemo")
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -639,6 +639,23 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+;;; @ visual-regexp-steroids              追加コンテンツ            ;;;
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+
+(require 'visual-regexp-steroids)
+(setq vr/engine 'python)
+;; python が インストールされてない環境では、上１行をコメントアウト、下２行をコメント解除
+;; (setq vr/engine 'pcre2el)
+;; (require 'pcre2el)
+
+;; multiple-cursors を使っている場合は下１行をコメント解除
+; (global-set-key (kbd "C-c m") 'vr/mc-mark)
+;; 普段の 'query-replace-regexp を visual-regexp-steroids に
+(global-set-key (kbd "C-x C-r") 'vr/query-replace)
+(global-set-key (kbd "C-S-x C-S-r") 'vr/replace)
+
+
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ git-gutter+                  追加コンテンツ                   ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
@@ -657,8 +674,9 @@
 		    ;; マウスの右クリックメニューを使えるようにする
 		    (defun bingalls-edit-menu (event)  (interactive "e")
 			   (popup-menu menu-bar-edit-menu))
-		    (global-set-key [mouse-3] 'bingalls-edit-menu)))
-
+		    (global-set-key [mouse-3] 'bingalls-edit-menu)
+		    )
+  )
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; ★ 俺キーバインド     key-bind  keybind                         ;;;
@@ -691,11 +709,12 @@
 (global-set-key (kbd "C-x r") 'query-replace)
 
 ;; 正規表現で置換
-(global-set-key (kbd "C-x C-r") 'query-replace-regexp)
+;; (global-set-key (kbd "C-x C-r") 'query-replace-regexp)
+;; visual-regexp を使うのでコメントアウトした
 
 ;; ハイライトする @hiwin
-(global-set-key (kbd "M-s s") 'hi-lock-find-patterns)
-(global-set-key (kbd "M-s l") 'highlight-lines-matching-regexp)
+(global-set-key (kbd "M-s s")   'hi-lock-find-patterns)
+(global-set-key (kbd "M-s l")   'highlight-lines-matching-regexp)
 (global-set-key (kbd "M-s M-s") 'highlight-regexp)
 (global-set-key (kbd "M-s d")   'unhighlight-regexp)  ;;ハイライト解除
 (global-set-key (kbd "M-s M-d") 'unhighlight-regexp)  ;;ハイライト解除
