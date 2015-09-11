@@ -270,20 +270,26 @@
 	("html" . (;ac-source-words-in-buffer
 		   ac-source-abbrev
 		   ac-source-files-in-current-dir
+		   ac-source-words-in-same-mode-buffers
 		   ac-source-html-sakura-dict
+		   `^.*style=.*'ac-source-css-include3-dict
 		   ))
 	("css"  . (;ac-source-words-in-buffer
 		   ac-source-abbrev
 		   ac-source-files-in-current-dir
+		   ac-source-words-in-same-mode-buffers
 		   ac-source-css-include3-dict
 		   ac-source-css-webkit-dict  
 		   ac-source-css-mozilla-dict ; prefix `x.'
 		   ac-source-css-property
+		   ac-source-words-in-all-buffer
 		   ))
 	("php"  . (;ac-source-words-in-buffer
 		   ac-source-abbrev
 		   ac-source-files-in-current-dir
+		   ac-source-words-in-same-mode-buffers
 		   ac-source-php-sakura-dict
+		   ac-source-words-in-buffers
 		   `$.'ac-source-html-sakura-dict ;; prefix `$.' これを付けることで、phpタグの外でしかhtmlの候補が出ない
 		   ))
 	))
@@ -294,8 +300,8 @@
   (setq ac-sources
         '(
           ac-source-abbrev
+	  ac-source-files-in-current-dir
           ac-source-words-in-same-mode-buffers
-          ac-source-filename
 	  ac-source-JS_mydict-dict
 	  ac-source-JS_BOM_mydict-dict
 	  ac-source-JS_DOM_mydict-dict

@@ -755,12 +755,21 @@
 
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/auto-complete/dict")
 
-;; 0.1秒後に自動で表示
-(setq ac-auto-show-menu 0.1)
+;; 0秒後に自動で表示
+(setq ac-auto-show-menu 0)
+
+;; 1文字目を入力したら補完開始
+(setq ac-auto-start 1)
+
+;; color
+;; (set-face-foreground 'ac-completion-face "pink")
+;; (set-face-background 'ac-completion-face "pink")
+;; (set-face-background 'ac-selection-face  "pink")
+;; (set-face-background 'ac-candidate-face  "pink")
 
 ;; デフォルトの補完内容
 (setq-default ac-sources '(
-ac-source-words-in-all-buffer
+ac-source-words-in-buffer ;; 現在のバッファの内容
 ac-source-abbrev
 ))
 
