@@ -8,12 +8,11 @@
 
 window.addEventListener()
 console.log()
-
-Array()
-Date()
-Number()
-RegExp()
-String()
+console.time()
+console.timeEnd()
+log()
+time()
+timeEnd()
 
 // Array
 constructor
@@ -101,6 +100,14 @@ isNaN()
 parseFloat()
 parseInt()
 unescape()
+Object()
+Array()
+String()
+Boolean()
+Number()
+Date()
+RegExp()
+Error()
 
 // Math
 Math
