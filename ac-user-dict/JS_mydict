@@ -9,6 +9,12 @@
 window.addEventListener()
 console.log()
 
+Array()
+Date()
+Number()
+RegExp()
+String()
+
 // Array
 constructor
 length
@@ -92,10 +98,8 @@ escape()
 eval()
 isFinite()
 isNaN()
-Number()
 parseFloat()
 parseInt()
-String()
 unescape()
 
 // Math

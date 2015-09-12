@@ -658,6 +658,8 @@
 ;; 普段の 'query-replace-regexp を visual-regexp に
 (define-key global-map (kbd "C-x C-r") 'vr/query-replace)
 (define-key global-map (kbd "C-S-x C-S-r") 'vr/replace)
+(global-set-key (kbd "C-S-s") 'vr/isearch-forward)
+(global-set-key (kbd "C-S-r") 'vr/isearch-backward)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -739,7 +741,8 @@
 ;; shell を開く
 (global-set-key (kbd "M-s h") 'shell)
 
-
+;; diff を開始  C-d のデフォルトは一文字削除
+(global-set-key (kbd "C-d") 'ediff-buffers)
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ auto-complete                追加コンテンツ                   ;;;
@@ -828,6 +831,9 @@ ac-source-abbrev
 (require 'powershell-mode)
 (autoload 'powershell-mode "powershell-mode" "A editing mode for Microsoft PowerShell." t)
 (add-to-list 'auto-mode-alist '("\\.ps1\\'" . powershell-mode))
+(add-hook 'powershell-mode-hook '(lambda()
+				   (auto-complete-mode t)
+				   ))
 
 ;; lua
 (require 'lua-mode)
