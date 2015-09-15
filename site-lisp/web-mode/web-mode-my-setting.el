@@ -1,15 +1,15 @@
 ;; web-mode-my-setting.el
 
 (setq web-mode-engines-alist
-      '(
-	("html"        . "\\.html?\\'")
-	("css"         . "\\.css\\'")
-	("javascript"  . "\\.js\\'")
-	("php"         . "\\(.phtml?\\|.php\\)\\'")
-	("blade"       . "\\.blade\\'")
-	("abbrev"      . "\\abbrev_defs\\'")
-	)
-)
+	  '(
+		("html"        . "\\.html?\\'")
+		("css"         . "\\.css\\'")
+		("javascript"  . "\\.js\\'")
+		("php"         . "\\(.phtml?\\|.php\\)\\'")
+		("blade"       . "\\.blade\\'")
+		("abbrev"      . "\\abbrev_defs\\'")
+		)
+	  )
 
 (add-hook 'web-mode-hook 'my-web-mode-hook)
 
@@ -17,10 +17,10 @@
   "Hooks for Web mode."
 
   ;; @auto-complete のための設定
-  ;;;;  html
+;;;;  html
   ;; (require 'ac-html)
   ;; (add-hook 'web-mode-hook 'ac-html-enable)
-  
+
   ;; <> </> で囲んでいるところを光らせる
   (setq web-mode-enable-current-column-highlight t)
   (setq web-mode-enable-current-element-highlight t)
@@ -29,7 +29,7 @@
   (setq web-mode-enable-auto-opening   t)
   (setq web-mode-enable-auto-expanding t) ; d/ と入力したら<div></div>など
   (setq web-mode-enable-auto-indentation t) ; 閉じかっこ入力で自動的にインデント直す
-  
+
   ;; CSS 色付け
   (setq web-mode-enable-css-colorization t)
 
@@ -38,7 +38,7 @@
   (setq web-mode-markup-indent-offset 2)  ;; HTML indent  2x2/2= 2文字インデント
   (setq web-mode-css-indent-offset    4)  ;; CSS  indent  2x4/2= 4文字インデント
   (setq web-mode-code-indent-offset   4)  ;; script indent(js,php,etc..)
-  
+
   ;; 変更日時の自動修正
   ;; (setq time-stamp-line-limit -200)
   ;; (if (not (memq 'time-stamp write-file-hooks))
@@ -60,11 +60,11 @@
   (setq web-mode-enable-block-faces t)
   (custom-set-faces
    '(web-mode-server-face
-     ((t (:background "grey"))))                  ; template Blockの背景色
+	 ((t (:background "grey"))))                  ; template Blockの背景色
    '(web-mode-css-face
-     ((t (:background "grey18"))))                ; CSS Blockの背景色
+	 ((t (:background "grey18"))))                ; CSS Blockの背景色
    '(web-mode-javascript-face
-     ((t (:background "grey36"))))                ; javascript Blockの背景色
+	 ((t (:background "grey36"))))                ; javascript Blockの背景色
    )
   (setq web-mode-enable-heredoc-fontification t)
   )

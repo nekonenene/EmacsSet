@@ -25,10 +25,10 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (let ( (default-directory
-         (file-name-as-directory (concat user-emacs-directory "site-lisp")))
-       )
+		 (file-name-as-directory (concat user-emacs-directory "site-lisp")))
+	   )
   (add-to-list 'load-path default-directory)
-;;  (add-to-list 'load-path "~/.emacs.d/elpa/")
+  ;;  (add-to-list 'load-path "~/.emacs.d/elpa/")
   (normal-top-level-add-subdirs-to-load-path)
   )
 
@@ -116,26 +116,26 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (setq default-frame-alist
-      (append '(
-		;; (width                . 77 ) ; フレーム幅
-		;; (height               . 44 ) ; フレーム高
-		;; (left                 . 81 ) ; 配置左位置
-		;; (top                  .  2 ) ; 配置上位置
-                (line-spacing         . 0  ) ; 文字間隔
-                (left-fringe          . 10 ) ; 左フリンジ幅
-                (right-fringe         . 11 ) ; 右フリンジ幅
-                (menu-bar-lines       . 1  ) ; メニューバー
-                (tool-bar-lines       . 1  ) ; ツールバー
-                (vertical-scroll-bars . 1  ) ; スクロールバー
-                (scroll-bar-width     . 14 ) ; スクロールバー幅
-                (cursor-type          . box) ; カーソル種別
-                (alpha                . 94) ; 透明度 
-               ) default-frame-alist) )
+	  (append '(
+				;; (width                . 77 ) ; フレーム幅
+				;; (height               . 44 ) ; フレーム高
+				;; (left                 . 81 ) ; 配置左位置
+				;; (top                  .  2 ) ; 配置上位置
+				(line-spacing         . 0  ) ; 文字間隔
+				(left-fringe          . 10 ) ; 左フリンジ幅
+				(right-fringe         . 11 ) ; 右フリンジ幅
+				(menu-bar-lines       . 1  ) ; メニューバー
+				(tool-bar-lines       . 1  ) ; ツールバー
+				(vertical-scroll-bars . 1  ) ; スクロールバー
+				(scroll-bar-width     . 14 ) ; スクロールバー幅
+				(cursor-type          . box) ; カーソル種別
+				(alpha                . 94) ; 透明度 
+				) default-frame-alist) )
 (setq initial-frame-alist default-frame-alist)
 
 ;; フレーム タイトル
 (setq frame-title-format
-      '("emacs " emacs-version (buffer-file-name " - %f")))
+	  '("emacs " emacs-version (buffer-file-name " - %f")))
 
 ;; 初期画面の非表示
 (setq inhibit-startup-message nil)
@@ -187,8 +187,8 @@
    ")%] "
    (which-func-mode ("" which-func-format " "))
    (line-number-mode
-    (:eval
-     (format "L%%l/L%d " (count-lines (point-max) 1) )))
+	(:eval
+	 (format "L%%l/L%d " (count-lines (point-max) 1) )))
    (column-number-mode " C%c ")
    (-3 . "%p")
    )
@@ -243,36 +243,36 @@
 (unless (facep 'cursor-ime-off)
   (make-face 'cursor-ime-off)
   (set-face-attribute 'cursor-ime-off nil
-                      :background "DarkRed" :foreground "White")
+					  :background "DarkRed" :foreground "White")
   )
 (unless (facep 'cursor-ime-on)
   (make-face 'cursor-ime-on)
   (set-face-attribute 'cursor-ime-on nil
-                      :background "DarkGreen" :foreground "White")
+					  :background "DarkGreen" :foreground "White")
   )
 
 ;; IME無効／有効時のカーソルカラー設定
 (add-hook
  'input-method-inactivate-hook
  '(lambda()
-    (if (facep 'cursor-ime-off)
-        (let ( (fg (face-attribute 'cursor-ime-off :foreground))
-               (bg (face-attribute 'cursor-ime-off :background)) )
-          (set-face-attribute 'cursor nil :foreground fg :background bg)
-          )
-      )
-    )
+	(if (facep 'cursor-ime-off)
+		(let ( (fg (face-attribute 'cursor-ime-off :foreground))
+			   (bg (face-attribute 'cursor-ime-off :background)) )
+		  (set-face-attribute 'cursor nil :foreground fg :background bg)
+		  )
+	  )
+	)
  )
 (add-hook
  'input-method-activate-hook
  '(lambda()
-    (if (facep 'cursor-ime-on)
-        (let ( (fg (face-attribute 'cursor-ime-on :foreground))
-               (bg (face-attribute 'cursor-ime-on :background)) )
-          (set-face-attribute 'cursor nil :foreground fg :background bg)
-          )
-      )
-    )
+	(if (facep 'cursor-ime-on)
+		(let ( (fg (face-attribute 'cursor-ime-on :foreground))
+			   (bg (face-attribute 'cursor-ime-on :background)) )
+		  (set-face-attribute 'cursor nil :foreground fg :background bg)
+		  )
+	  )
+	)
  )
 
 ;; バッファ切り替え時の状態引継ぎ設定
@@ -289,11 +289,11 @@
 (defvar linum-line-number 0)
 (declare-function linum-update-current "linum" ())
 (defadvice linum-update-current
-    (around linum-update-current-around activate compile)
+	(around linum-update-current-around activate compile)
   (unless (= linum-line-number (line-number-at-pos))
-    (setq linum-line-number (line-number-at-pos))
-    ad-do-it
-    ))
+	(setq linum-line-number (line-number-at-pos))
+	ad-do-it
+	))
 
 ;; バッファ中の行番号表示の遅延設定
 (defvar linum-delay nil)
@@ -316,6 +316,18 @@
 
 ;; 折り返す
 (setq-default word-wrap t)
+
+;; 改行時にインデント箇所から始める
+(setq-default newline-and-indent t)
+
+;; auto-indentation 関連の初期設定
+(defun insert-tab-char ()
+  "insert a tab char. (ASCII 9, \t)"
+  (interactive)
+  (insert "\t")
+  )
+(setq-default indent-tabs-mode t)
+(setq-default tab-width 4)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -418,8 +430,8 @@
 
 ;; ファイルオープン時のバックアップ（~）の格納ディレクトリ
 (setq backup-directory-alist
-      (cons (cons "\\.*$" (expand-file-name "/tmp/emacsbk"))
-            backup-directory-alist))
+	  (cons (cons "\\.*$" (expand-file-name "/tmp/emacsbk"))
+			backup-directory-alist))
 
 ;; 編集中ファイルの自動バックアップ
 (setq backup-inhibited nil)
@@ -439,7 +451,7 @@
 
 ;; 編集中ファイル（##）の格納ディレクトリ
 (setq auto-save-file-name-transforms
-      `((".*" ,(expand-file-name "/tmp/emacsbk") t)))
+	  `((".*" ,(expand-file-name "/tmp/emacsbk") t)))
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -488,26 +500,41 @@
 (defadvice scroll-down (around scroll-down activate compile)
   (interactive)
   (let (
-        (bgn-num (+ 1 (count-lines (point-min) (point))))
-        )
-    (if (< bgn-num (window-height))
-        (goto-char (point-min))
-      ad-do-it) ))
+		(bgn-num (+ 1 (count-lines (point-min) (point))))
+		)
+	(if (< bgn-num (window-height))
+		(goto-char (point-min))
+	  ad-do-it) ))
 
 ;; バッファの先頭までスクロールアップ
 (defadvice scroll-up (around scroll-up activate compile)
   (interactive)
   (let (
-        (bgn-num (+ 1 (count-lines (point-min) (point))))
-        (end-num nil)
-        )
-    (save-excursion
-      (goto-char (point-max))
-      (setq end-num (+ 1 (count-lines (point-min) (point))))
-      )
-    (if (< (- (- end-num bgn-num) (window-height)) 0)
-        (goto-char (point-max))
-      ad-do-it) ))
+		(bgn-num (+ 1 (count-lines (point-min) (point))))
+		(end-num nil)
+		)
+	(save-excursion
+	  (goto-char (point-max))
+	  (setq end-num (+ 1 (count-lines (point-min) (point))))
+	  )
+	(if (< (- (- end-num bgn-num) (window-height)) 0)
+		(goto-char (point-max))
+	  ad-do-it) ))
+
+
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+;;; 右クリックの挙動を変更                                          ;;;
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+
+;; マウスの右クリックの割り当て(押しながらの操作)をはずす
+(if window-system (progn
+					(global-unset-key [down-mouse-3])
+					;; マウスの右クリックメニューを使えるようにする
+					(defun bingalls-edit-menu (event)  (interactive "e")
+						   (popup-menu menu-bar-edit-menu))
+					(global-set-key [mouse-3] 'bingalls-edit-menu)
+					)
+  )
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -525,6 +552,14 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+;;; @ flymake                                                       ;;;
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+;; 標準機能の flymeke をインポートする
+(require 'flymake)
+(add-hook 'find-file-hook 'flymake-find-file-hook)
+
+
+;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ screen - tabbar                                               ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
@@ -535,8 +570,8 @@
 
 ;; ボタン非表示
 (dolist (btn '(tabbar-buffer-home-button
-               tabbar-scroll-left-button
-               tabbar-scroll-right-button))
+			   tabbar-scroll-left-button
+			   tabbar-scroll-right-button))
   (set btn (cons (cons "" nil) (cons "" nil)))
   )
 
@@ -565,17 +600,17 @@
 (set-face-background 'whitespace-space nil)
 (set-face-bold-p 'whitespace-space t)
 ;; Tabの色		theme.el - whitespace-tab 内でも指定されている
-;(set-face-foreground 'whitespace-tab "DarkOliveGreen1")
-;(set-face-background 'whitespace-tab nil)
-;(set-face-underline  'whitespace-tab t)
+										;(set-face-foreground 'whitespace-tab "DarkOliveGreen1")
+										;(set-face-background 'whitespace-tab nil)
+										;(set-face-underline  'whitespace-tab t)
 
 ;; 全角スペースとTabのみ強調（デフォだと半角スペースや改行を強調したりする）
 (setq whitespace-style '(face tabs tab-mark spaces space-mark))
 (setq whitespace-space-regexp "\\(\x3000+\\)")
 (setq whitespace-display-mappings
-      '((space-mark ?\x3000 [?\□])
-        (tab-mark   ?\t   [?\xBB ?\t])
-        ))
+	  '((space-mark ?\x3000 [?\□])
+		(tab-mark   ?\t   [?\xBB ?\t])
+		))
 
 (global-whitespace-mode 1) ; 全角スペースを常に表示
 
@@ -603,8 +638,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; addrev の設定  ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
-;(setq addrev-file-name "~/.emacs.d/abbrev_defs") ;; ここ以外指定できないっぽい
-;(setq save-abbrevs t)
+										;(setq addrev-file-name "~/.emacs.d/abbrev_defs") ;; ここ以外指定できないっぽい
+										;(setq save-abbrevs t)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -623,6 +658,7 @@
 
 (add-hook 'text-mode-hook 'rainbow-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
+(add-hook 'js2-mode-hook 'rainbow-mode)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -631,9 +667,9 @@
 
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+			 '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+			 '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
 
@@ -641,12 +677,13 @@
 ;;; @ visual-regexp-steroids              追加コンテンツ            ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-(defvar emacs-root
-  (eval-when-compile
-    '(
-      (require 'visual-regexp-steroids)
-      )))
+;; (defvar emacs-root
+;;   (eval-when-compile
+;;     '(
+(require 'visual-regexp-steroids)
+;;      )))
 ;; 上記のように書かないと `regexp-string' 由来のコンパイル警告を吐く
+;; しかし上記のように defvar を書くと、pcre2el モードで動いてしまうことがわかったのでコメントアウトした
 
 (setq vr/engine 'python) ; 'python, 'pcre2el, or 'emacs
 ;; python が インストールされてない環境では、上１行をコメントアウト、下２行をコメント解除
@@ -654,27 +691,19 @@
 ;; (require 'pcre2el)
 
 ;; multiple-cursors ( https://github.com/magnars/multiple-cursors.el ) を使っている場合は下１行をコメント解除
-; (global-set-key (kbd "C-c m") 'vr/mc-mark)
+										; (global-set-key (kbd "C-c m") 'vr/mc-mark)
 ;; 普段の 'query-replace-regexp を visual-regexp に
-(define-key global-map (kbd "C-x C-r") 'vr/query-replace)
-(define-key global-map (kbd "C-S-x C-S-r") 'vr/replace)
+(global-set-key (kbd "C-x C-r") 'vr/query-replace)
+(global-set-key (kbd "C-S-x C-S-r") 'vr/replace)
 (global-set-key (kbd "C-S-s") 'vr/isearch-forward)
 (global-set-key (kbd "C-S-r") 'vr/isearch-backward)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; 右クリックの挙動を変更                                          ;;;
+;;; @ magit                          追加コンテンツ                 ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; マウスの右クリックの割り当て(押しながらの操作)をはずす
-(if window-system (progn
-		    (global-unset-key [down-mouse-3])
-		    ;; マウスの右クリックメニューを使えるようにする
-		    (defun bingalls-edit-menu (event)  (interactive "e")
-			   (popup-menu menu-bar-edit-menu))
-		    (global-set-key [mouse-3] 'bingalls-edit-menu)
-		    )
-  )
+(require 'magit)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -744,6 +773,25 @@
 ;; diff を開始  C-d のデフォルトは一文字削除
 (global-set-key (kbd "C-d") 'ediff-buffers)
 
+;; Ctrl + Alt + i で More Indent （本来は半自動インデントキーバインド）
+(global-set-key (kbd "C-M-i") 'increase-left-margin)
+(global-set-key (kbd "C-S-i") 'decrease-left-margin)
+
+;; Magit 関連
+(global-set-key (kbd "M-g M-s") 'magit-status)
+(global-set-key (kbd "M-g s") 'magit-status) ;; たいてい status で片付く
+(global-set-key (kbd "M-g i n") 'magit-init)
+(global-set-key (kbd "M-g a d") 'magit-stage) ;; たぶん add と同じ
+(global-set-key (kbd "M-g f t") 'magit-fetch)
+(global-set-key (kbd "M-g p l") 'magit-pull)
+(global-set-key (kbd "M-g p s") 'magit-push)
+(global-set-key (kbd "M-g d f") 'magit-diff)
+(global-set-key (kbd "M-g r s") 'magit-reset)
+(global-set-key (kbd "M-g r b") 'magit-rebase)
+(global-set-key (kbd "M-g l o") 'magit-log)
+(global-set-key (kbd "M-g l g") 'magit-log)
+
+
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ auto-complete                追加コンテンツ                   ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -769,9 +817,9 @@
 
 ;; デフォルトの補完内容
 (setq-default ac-sources '(
-ac-source-words-in-buffer ;; 現在のバッファの内容
-ac-source-abbrev
-))
+						   ac-source-words-in-buffer ;; 現在のバッファの内容
+						   ac-source-abbrev
+						   ))
 
 ;;;; ac-user-dict のインポート                   ;;;;
 ;;;; http://fukuyama.co/emacs-auto-complete      ;;;;
@@ -782,9 +830,11 @@ ac-source-abbrev
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;  modeの設定  ;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;:;;;;;;
+;; 拡張子の末尾は "$" or "\\"  \\ がベター
+;; 参考 : http://syohex.hatenablog.com/entry/20140910/1410356727
 
 ;; emacs-lisp
-(add-to-list 'auto-mode-alist '(".el$'"      . emacs-lisp-mode))
+(add-to-list 'auto-mode-alist '(".el\\'"      . emacs-lisp-mode))
 
 ;; .h は c-mode でなく c++-mode で
 (add-to-list 'auto-mode-alist '("\\.h\\'"   . c++-mode))
@@ -802,7 +852,7 @@ ac-source-abbrev
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'"     . web-mode))
 
 (add-to-list 'auto-mode-alist '("\\(.html?\\|.css\\|.php\\)\\'"
-				. web-mode))
+								. web-mode))
 
 (require 'web-mode-my-setting)
 
@@ -817,7 +867,7 @@ ac-source-abbrev
 ;; csv-mode
 (require 'csv-mode)
 (add-to-list 'auto-mode-alist '("\\.csv\\'"         . csv-mode))
-  
+
 ;; gitignore
 (require 'gitignore-mode)
 (add-to-list 'auto-mode-alist '("\\.gitignore\\'"   . gitignore-mode))
@@ -832,8 +882,8 @@ ac-source-abbrev
 (autoload 'powershell-mode "powershell-mode" "A editing mode for Microsoft PowerShell." t)
 (add-to-list 'auto-mode-alist '("\\.ps1\\'" . powershell-mode))
 (add-hook 'powershell-mode-hook '(lambda()
-				   (auto-complete-mode t)
-				   ))
+								   (auto-complete-mode t)
+								   ))
 
 ;; lua
 (require 'lua-mode)
@@ -847,15 +897,15 @@ ac-source-abbrev
 
 ;; テーマ格納ディレクトリのパス追加
 (add-to-list 'custom-theme-load-path
-             (file-name-as-directory (concat user-emacs-directory "theme"))
-             )
+			 (file-name-as-directory (concat user-emacs-directory "theme"))
+			 )
 
 ;; テーマ選択
 ;; (load-theme 'solarized-light t)
 ;; (load-theme 'solarized-dark t)
 ;; (load-theme 'gnupack-dark t)
 ;; (load-theme 'tsdh-dark t)
- (load-theme 'tsdh-dark-kai t)
+(load-theme 'tsdh-dark-kai t)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -869,7 +919,6 @@ ac-source-abbrev
 ;; (unless (server-running-p)
 ;;   (server-start)
 ;; )
-
 
 
 (custom-set-variables

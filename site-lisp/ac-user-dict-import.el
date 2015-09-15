@@ -10,20 +10,20 @@
 ;; コンプリート時の動作 - 候補の末尾に()があればその内にカーソルを置く
 (defun ac-go-into-braces-action ()
   (save-restriction
-    (narrow-to-region (point) (- (point) 2))
-    (if (re-search-backward "()" nil t)
-        (forward-char))
-    (if (re-search-backward "{}" nil t)
-        (forward-char))
+	(narrow-to-region (point) (- (point) 2))
+	(if (re-search-backward "()" nil t)
+		(forward-char))
+	(if (re-search-backward "{}" nil t)
+		(forward-char))
 
-    ))
+	))
 
 ;; 直前の文字を区別して辞書を使用する - 何か1文字+ドットの後の場合に補完する
 (defun ac-js-dot-prefix ()
   "`x.' prefix."
   (if (re-search-backward ".\\.\\(.*\\)" nil t)
-      ;; ".\\.\\(.*\\)" 何か一文字[.] ドット[\\.] 補完開始点[\\(.*\\)]
-      (match-beginning 1)))
+	  ;; ".\\.\\(.*\\)" 何か一文字[.] ドット[\\.] 補完開始点[\\(.*\\)]
+	  (match-beginning 1)))
 
 ;; メニューで選択中の候補の色設定
 (defface ac-my-selection-face
@@ -43,14 +43,14 @@
 ;; 辞書1の設定
 (defvar ac-source-underscore-js-dict
   '((candidates . ac-underscore-js-cache) ;; 候補の情報源 これ以下はオプション
-    (candidate-face . ac-underscore-js-candidate-face) ;; 候補の色設定
-    (selection-face . ac-my-selection-face) ;; 選択中の色設定
-    (prefix . ac-js-dot-prefix) ;; 直前の文字の条件
-    (action . ac-go-into-braces-action) ;; 補完後の動作
-    (symbol . "underscore.js") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
-    ;; (requires . 2) ;; 補完が開始される最低入力文字数を上書き
-    ;; (limit . 30) ;; 候補を一度に表示する上限数を上書き
-    ))
+	(candidate-face . ac-underscore-js-candidate-face) ;; 候補の色設定
+	(selection-face . ac-my-selection-face) ;; 選択中の色設定
+	(prefix . ac-js-dot-prefix) ;; 直前の文字の条件
+	(action . ac-go-into-braces-action) ;; 補完後の動作
+	(symbol . "underscore.js") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+	;; (requires . 2) ;; 補完が開始される最低入力文字数を上書き
+	;; (limit . 30) ;; 候補を一度に表示する上限数を上書き
+	))
 
 ;;; 辞書2 (jquery)
 ;; 色設定
@@ -64,38 +64,38 @@
 ;; 辞書2の設定
 (defvar ac-source-jquery-method-dict1
   '((candidates . ac-jquery-method1-cache)
-    (candidate-face . ac-jquery-candidate-face)
-    (selection-face . ac-my-selection-face)
-    (prefix . ac-js-dot-prefix)
-    (action . ac-go-into-braces-action)
-    (symbol . "jquery method1")
-    ))
+	(candidate-face . ac-jquery-candidate-face)
+	(selection-face . ac-my-selection-face)
+	(prefix . ac-js-dot-prefix)
+	(action . ac-go-into-braces-action)
+	(symbol . "jquery method1")
+	))
 
 ;;; 辞書3 (jquery)
 ;; 直前の文字の条件 (`jQuery.'または`$.')
 (defun ac-jquery-method2-prefix ()
   "`$' or `jQuery' prefix."
   (if (re-search-backward "\\(jQuery\\|\\$\\)\\.\\(.*\\)" nil t)
-      (match-beginning 2)))
+	  (match-beginning 2)))
 ;; 情報源に辞書ファイルを指定
 (defvar ac-jquery-method2-cache
   (ac-file-dictionary (concat ac-user-dict-dir "jquery-method2")))
 ;; 辞書3の設定
 (defvar ac-source-jquery-method-dict2
   '((candidates . ac-jquery-method2-cache)
-    (candidate-face . ac-jquery-candidate-face)
-    (selection-face . ac-my-selection-face)
-    (prefix . ac-jquery-method2-prefix)
-    (action . ac-go-into-braces-action)
-    (symbol . "jquery method2")
-    ))
+	(candidate-face . ac-jquery-candidate-face)
+	(selection-face . ac-my-selection-face)
+	(prefix . ac-jquery-method2-prefix)
+	(action . ac-go-into-braces-action)
+	(symbol . "jquery method2")
+	))
 
 ;;; 辞書4 (jqueryセレクタ)
 ;; 直前の文字の条件 (`x:')
 (defun ac-jquery-selector-prefix ()
   "`x:' prefix."
   (if (re-search-backward ".\\:\\(.*\\)" nil t)
-      (match-beginning 1)))
+	  (match-beginning 1)))
 ;; 色設定
 (defface ac-jquery-selector-candidate-face
   '((t (:background "#998822" :foreground "#eeeeee")))
@@ -107,12 +107,12 @@
 ;; 辞書4の設定
 (defvar ac-source-jquery-selector-dict
   '((candidates . ac-jquery-selector-cache)
-    (candidate-face . ac-jquery-selector-candidate-face)
-    (selection-face . ac-my-selection-face)
-    (prefix . ac-jquery-selector-prefix)
-    (action . ac-go-into-braces-action)
-    (symbol . "jQuery selector")
-    ))
+	(candidate-face . ac-jquery-selector-candidate-face)
+	(selection-face . ac-my-selection-face)
+	(prefix . ac-jquery-selector-prefix)
+	(action . ac-go-into-braces-action)
+	(symbol . "jQuery selector")
+	))
 
 
 ;;;;  HTML, CSS, PHP のための auto-complete ;;;;
@@ -128,11 +128,11 @@
   (ac-file-dictionary (concat ac-user-dict-dir "css-include3")))
 (defvar ac-source-css-include3-dict
   '((candidates . ac-css-include3-cache) ;; 候補の情報源 これ以下はオプション
-    (candidate-face . ac-css-include3-candidate-face) ;; 候補の色設定
-    (selection-face . ac-my-selection-face) ;; 選択中の色設定
-    (action . ac-go-into-braces-action) ;; 補完後の動作
-    (symbol . "CSS") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
-    ))
+	(candidate-face . ac-css-include3-candidate-face) ;; 候補の色設定
+	(selection-face . ac-my-selection-face) ;; 選択中の色設定
+	(action . ac-go-into-braces-action) ;; 補完後の動作
+	(symbol . "CSS") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+	))
 
 ;;; 辞書2 (css-webkit)
 ;; 色設定
@@ -145,11 +145,11 @@
   (ac-file-dictionary (concat ac-user-dict-dir "css-webkit")))
 (defvar ac-source-css-webkit-dict
   '((candidates . ac-css-webkit-cache) ;; 候補の情報源 これ以下はオプション
-    (candidate-face . ac-css-webkit-candidate-face) ;; 候補の色設定
-    (selection-face . ac-my-selection-face) ;; 選択中の色設定
-    (action . ac-go-into-braces-action) ;; 補完後の動作
-    (symbol . "CSS-webkit") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
-    ))
+	(candidate-face . ac-css-webkit-candidate-face) ;; 候補の色設定
+	(selection-face . ac-my-selection-face) ;; 選択中の色設定
+	(action . ac-go-into-braces-action) ;; 補完後の動作
+	(symbol . "CSS-webkit") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+	))
 
 ;;; 辞書3 (css-mozilla)
 ;; 色設定
@@ -162,11 +162,11 @@
   (ac-file-dictionary (concat ac-user-dict-dir "css-mozilla")))
 (defvar ac-source-css-mozilla-dict
   '((candidates . ac-css-mozilla-cache) ;; 候補の情報源 これ以下はオプション
-    (candidate-face . ac-css-mozilla-candidate-face) ;; 候補の色設定
-    (selection-face . ac-my-selection-face) ;; 選択中の色設定
-    (action . ac-go-into-braces-action) ;; 補完後の動作
-    (symbol . "CSS-moz") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
-    ))
+	(candidate-face . ac-css-mozilla-candidate-face) ;; 候補の色設定
+	(selection-face . ac-my-selection-face) ;; 選択中の色設定
+	(action . ac-go-into-braces-action) ;; 補完後の動作
+	(symbol . "CSS-moz") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+	))
 
 
 ;;; 辞書4 (HTML)
@@ -180,11 +180,11 @@
   (ac-file-dictionary (concat ac-user-dict-dir "html-sakura")))
 (defvar ac-source-html-sakura-dict
   '((candidates . ac-html-sakura-cache) ;; 候補の情報源 これ以下はオプション
-    (candidate-face . ac-html-sakura-candidate-face) ;; 候補の色設定
-    (selection-face . ac-my-selection-face) ;; 選択中の色設定
-    (action . ac-go-into-braces-action) ;; 補完後の動作
-    (symbol . "HTML") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
-    ))
+	(candidate-face . ac-html-sakura-candidate-face) ;; 候補の色設定
+	(selection-face . ac-my-selection-face) ;; 選択中の色設定
+	(action . ac-go-into-braces-action) ;; 補完後の動作
+	(symbol . "HTML") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+	))
 
 
 ;;; 辞書5 (PHP)
@@ -198,11 +198,11 @@
   (ac-file-dictionary (concat ac-user-dict-dir "php-sakura")))
 (defvar ac-source-php-sakura-dict
   '((candidates . ac-php-sakura-cache) ;; 候補の情報源 これ以下はオプション
-    (candidate-face . ac-php-sakura-candidate-face) ;; 候補の色設定
-    (selection-face . ac-my-selection-face) ;; 選択中の色設定
-    (action . ac-go-into-braces-action) ;; 補完後の動作
-    (symbol . "PHP") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
-    ))
+	(candidate-face . ac-php-sakura-candidate-face) ;; 候補の色設定
+	(selection-face . ac-my-selection-face) ;; 選択中の色設定
+	(action . ac-go-into-braces-action) ;; 補完後の動作
+	(symbol . "PHP") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+	))
 
 
 ;;;;  JavaScript のための auto-complete ;;;;
@@ -218,11 +218,11 @@
   (ac-file-dictionary (concat ac-user-dict-dir "JS_mydict")))
 (defvar ac-source-JS_mydict-dict
   '((candidates . ac-JS_mydict-cache) ;; 候補の情報源 これ以下はオプション
-    (candidate-face . ac-JS_mydict-candidate-face) ;; 候補の色設定
-    (selection-face . ac-my-selection-face) ;; 選択中の色設定
-    (action . ac-go-into-braces-action) ;; 補完後の動作
-    (symbol . "JS") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
-    ))
+	(candidate-face . ac-JS_mydict-candidate-face) ;; 候補の色設定
+	(selection-face . ac-my-selection-face) ;; 選択中の色設定
+	(action . ac-go-into-braces-action) ;; 補完後の動作
+	(symbol . "JS") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+	))
 
 
 ;;; 辞書6 (JavaScript BOM)
@@ -236,11 +236,11 @@
   (ac-file-dictionary (concat ac-user-dict-dir "JS_BOM_mydict")))
 (defvar ac-source-JS_BOM_mydict-dict
   '((candidates . ac-JS_BOM_mydict-cache) ;; 候補の情報源 これ以下はオプション
-    (candidate-face . ac-JS_BOM_mydict-candidate-face) ;; 候補の色設定
-    (selection-face . ac-my-selection-face) ;; 選択中の色設定
-    (action . ac-go-into-braces-action) ;; 補完後の動作
-    (symbol . "JS_BOM") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
-    ))
+	(candidate-face . ac-JS_BOM_mydict-candidate-face) ;; 候補の色設定
+	(selection-face . ac-my-selection-face) ;; 選択中の色設定
+	(action . ac-go-into-braces-action) ;; 補完後の動作
+	(symbol . "JS_BOM") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+	))
 
 
 ;;; 辞書7 (JavaScript)
@@ -254,11 +254,11 @@
   (ac-file-dictionary (concat ac-user-dict-dir "JS_DOM_mydict")))
 (defvar ac-source-JS_DOM_mydict-dict
   '((candidates . ac-JS_DOM_mydict-cache) ;; 候補の情報源 これ以下はオプション
-    (candidate-face . ac-JS_DOM_mydict-candidate-face) ;; 候補の色設定
-    (selection-face . ac-my-selection-face) ;; 選択中の色設定
-    (action . ac-go-into-braces-action) ;; 補完後の動作
-    (symbol . "JS_DOM") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
-    ))
+	(candidate-face . ac-JS_DOM_mydict-candidate-face) ;; 候補の色設定
+	(selection-face . ac-my-selection-face) ;; 選択中の色設定
+	(action . ac-go-into-braces-action) ;; 補完後の動作
+	(symbol . "JS_DOM") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+	))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -266,57 +266,57 @@
 
 ;;;; web-mode : auto-complete のための設定 ;;;;
 (setq web-mode-ac-sources-alist
-      '(
-	("html" . (;ac-source-words-in-buffer
-		   ac-source-html-sakura-dict
+	  '(
+		("html" . (;ac-source-words-in-buffer
+				   ac-source-html-sakura-dict
 
-		   ac-source-abbrev
-		   ac-source-words-in-same-mode-buffers
-		   ac-source-files-in-current-dir
-		   ))
-	("css"  . (;ac-source-words-in-buffer
-		   ac-source-css-include3-dict
-		   ac-source-css-property
-		   ac-source-css-webkit-dict  
-		   ac-source-css-mozilla-dict ; prefix `x.'
+				   ac-source-abbrev
+				   ac-source-words-in-same-mode-buffers
+				   ac-source-files-in-current-dir
+				   ))
+		("css"  . (;ac-source-words-in-buffer
+				   ac-source-css-include3-dict
+				   ac-source-css-property
+				   ac-source-css-webkit-dict  
+				   ac-source-css-mozilla-dict ; prefix `x.'
 
-		   ac-source-abbrev
-		   ac-source-words-in-same-mode-buffers
-		   ac-source-files-in-current-dir
-		   ))
-	("php"  . (;ac-source-words-in-buffer
-		   ac-source-php-sakura-dict
-		   `$.'ac-source-html-sakura-dict ;; prefix `$.' これを付けることで、phpタグの外でしかhtmlの候補が出ない
-		   ac-source-abbrev
-		   ac-source-words-in-same-mode-buffers
-		   ac-source-files-in-current-dir
+				   ac-source-abbrev
+				   ac-source-words-in-same-mode-buffers
+				   ac-source-files-in-current-dir
+				   ))
+		("php"  . (;ac-source-words-in-buffer
+				   ac-source-php-sakura-dict
+				   `$.'ac-source-html-sakura-dict ;; prefix `$.' これを付けることで、phpタグの外でしかhtmlの候補が出ない
+				   ac-source-abbrev
+				   ac-source-words-in-same-mode-buffers
+				   ac-source-files-in-current-dir
 
-		   ))
-	))
+				   ))
+		))
 
 
 ;;;; web-mode : auto-complete のための設定 ;;;;
 (defun ac-js-mode-setup ()
   (setq ac-sources
-        '(
-	  ac-source-JS_mydict-dict
-	  ac-source-JS_BOM_mydict-dict
-	  ac-source-JS_DOM_mydict-dict
+		'(
+		  ac-source-JS_mydict-dict
+		  ac-source-JS_BOM_mydict-dict
+		  ac-source-JS_DOM_mydict-dict
 
-          ac-source-abbrev
-          ac-source-words-in-same-mode-buffers
-	  ac-source-files-in-current-dir
+		  ac-source-abbrev
+		  ac-source-words-in-same-mode-buffers
+		  ac-source-files-in-current-dir
 
-	  `$.'ac-source-css-include3-dict
-	  
-          ;; 優先順位で並べる (prefixを指定すると排他的になる; x.に$.が含まれる)
-	  ;; とりあえず jQuery 今は使わないのでコメントアウト
-	  ;; ac-source-jquery-method-dict2  ; prefix `$.'
-          ;; ac-source-jquery-method-dict1  ; prefix `x.'
-          ;; ac-source-underscore-js-dict   ; prefix `x.'
-          ;; ac-source-jquery-selector-dict ; prefix `x:'
-          ;; ac-source-yasnippet
-          )))
+		  `$.'ac-source-css-include3-dict
+
+		  ;; 優先順位で並べる (prefixを指定すると排他的になる; x.に$.が含まれる)
+		  ;; とりあえず jQuery 今は使わないのでコメントアウト
+		  ;; ac-source-jquery-method-dict2  ; prefix `$.'
+		  ;; ac-source-jquery-method-dict1  ; prefix `x.'
+		  ;; ac-source-underscore-js-dict   ; prefix `x.'
+		  ;; ac-source-jquery-selector-dict ; prefix `x:'
+		  ;; ac-source-yasnippet
+		  )))
 ;; メジャーモードに反映させる
 (add-hook 'js-mode-hook 'ac-js-mode-setup)
 (add-hook 'js2-mode-hook 'ac-js-mode-setup)
