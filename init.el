@@ -779,10 +779,11 @@
 
 ;; Magit 関連
 (global-set-key (kbd "M-g M-s") 'magit-status)
-(global-set-key (kbd "M-g s") 'magit-status) ;; たいてい status で片付く
+(global-set-key (kbd "M-g s")   'magit-status) ;; たいてい status で片付く
 (global-set-key (kbd "M-g i n") 'magit-init)
 (global-set-key (kbd "M-g a d") 'magit-stage) ;; たぶん add と同じ
 (global-set-key (kbd "M-g f t") 'magit-fetch)
+(global-unset-key  (kbd "M-g p") )  ;; previous-error のキーバインドを解除
 (global-set-key (kbd "M-g p l") 'magit-pull)
 (global-set-key (kbd "M-g p s") 'magit-push)
 (global-set-key (kbd "M-g d f") 'magit-diff)
