@@ -791,6 +791,7 @@
 (global-set-key (kbd "M-g r b") 'magit-rebase)
 (global-set-key (kbd "M-g l o") 'magit-log)
 (global-set-key (kbd "M-g b r") 'magit-branch-manager)
+(global-unset-key  (kbd "M-g c") )  ;; goto char らしいけど、searchあるからいいっしょ
 (global-set-key (kbd "M-g c o") 'magit-checkout)
 (global-set-key (kbd "M-g c c") 'magit-commit)
 
