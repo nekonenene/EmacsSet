@@ -790,7 +790,9 @@
 (global-set-key (kbd "M-g r s") 'magit-reset)
 (global-set-key (kbd "M-g r b") 'magit-rebase)
 (global-set-key (kbd "M-g l o") 'magit-log)
-(global-set-key (kbd "M-g l g") 'magit-log)
+(global-set-key (kbd "M-g b r") 'magit-branch-manager)
+(global-set-key (kbd "M-g c o") 'magit-checkout)
+(global-set-key (kbd "M-g c c") 'magit-commit)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
