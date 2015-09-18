@@ -563,6 +563,8 @@
 ;; (require 'flymake)
 ;; (require 'flymake-my-setting)
 ;; (add-hook 'find-file-hook 'flymake-find-file-hook)
+(require 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;

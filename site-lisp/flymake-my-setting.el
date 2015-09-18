@@ -1,9 +1,14 @@
 ;; flymake-my-setting.el
 
 ;; http://d.hatena.ne.jp/sandai/20120304/p2 より設定引用
-;; 下の一行はflymakeモードでエラー行に飛べるコマンドをキーに割り当ててるコードですが、
-;; 個人的な理由でコメントアウトしてます。必要でしたらこのコメント削除して、アンコメントしてください
-;;(define-key global-map (kbd "C-cd") 'flymake-display-err-menu-for-current-line)
+;; 下の一行はflymakeモードでエラー行に飛べるコマンド
+;; (define-key global-map (kbd "C-c d") 'flymake-display-err-menu-for-current-line)
+
+;; javascript : jshint
+(require 'flymake-node-jshint)
+;; (setq flymake-node-jshint-config "~/.jshintrc-node.json") ; optional
+(add-hook 'js-mode-hook (lambda () (flymake-mode 1)))
+(add-hook 'js2-mode-hook (lambda () (flymake-mode 1)))
 
 
 ;; C
