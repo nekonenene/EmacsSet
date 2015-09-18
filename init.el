@@ -557,12 +557,10 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ flymake                                                       ;;;
+;;; @ flycheck                         追加コンテンツ               ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;; 標準機能の flymeke をインポートする
-;; (require 'flymake)
-;; (require 'flymake-my-setting)
-;; (add-hook 'find-file-hook 'flymake-find-file-hook)
+
+;; flymake より 導入が手軽な flycheck を使う
 (require 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
