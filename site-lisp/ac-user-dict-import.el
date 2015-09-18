@@ -225,6 +225,49 @@
 	))
 
 
+;;; 辞書5-2 (JavaScript after-dot)
+;; 色設定
+(defface ac-JS_mydict_afterdot-candidate-face
+  '((t (:background "#ffcc33" :foreground "#220")))
+  "Face for JS_mydict_afterdot candidates."
+  :group 'auto-complete)
+;; 情報源に辞書ファイルを指定
+(defvar ac-JS_mydict_afterdot-cache
+  (ac-file-dictionary (concat ac-user-dict-dir "JS_mydict_afterdot")))
+(defvar ac-source-JS_mydict_afterdot-dict
+  '((candidates . ac-JS_mydict_afterdot-cache) ;; 候補の情報源 これ以下はオプション
+	(candidate-face . ac-JS_mydict_afterdot-candidate-face) ;; 候補の色設定
+	(selection-face . ac-my-selection-face) ;; 選択中の色設定
+	(prefix . ac-js-dot-prefix) ;; 直前の文字がドット
+	(action . ac-go-into-braces-action) ;; 補完後の動作
+	(symbol . "JS") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+	))
+
+
+;;; 辞書5-2 (JavaScript Math)
+;; 直前の文字の条件 (`Math.')
+(defun ac-js-math-prefix ()
+  "`Math.' prefix."
+  (if (re-search-backward "Math\\.\\(.*\\)" nil t)
+	  (match-beginning 1)))
+;; 色設定
+(defface ac-JS_mydict_Math-candidate-face
+  '((t (:background "#ffcc33" :foreground "#220")))
+  "Face for JS_mydict_Math candidates."
+  :group 'auto-complete)
+;; 情報源に辞書ファイルを指定
+(defvar ac-JS_mydict_Math-cache
+  (ac-file-dictionary (concat ac-user-dict-dir "JS_mydict_Math")))
+(defvar ac-source-JS_mydict_Math-dict
+  '((candidates . ac-JS_mydict_Math-cache) ;; 候補の情報源 これ以下はオプション
+	(candidate-face . ac-JS_mydict_Math-candidate-face) ;; 候補の色設定
+	(selection-face . ac-my-selection-face) ;; 選択中の色設定
+	(prefix . ac-js-math-prefix) ;; 直前の文字がドット
+	(action . ac-go-into-braces-action) ;; 補完後の動作
+	(symbol . "JS Math") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+	))
+
+
 ;;; 辞書6 (JavaScript BOM)
 ;; 色設定
 (defface ac-JS_BOM_mydict-candidate-face
@@ -238,12 +281,13 @@
   '((candidates . ac-JS_BOM_mydict-cache) ;; 候補の情報源 これ以下はオプション
 	(candidate-face . ac-JS_BOM_mydict-candidate-face) ;; 候補の色設定
 	(selection-face . ac-my-selection-face) ;; 選択中の色設定
+	(prefix . ac-js-dot-prefix) ;; 直前の文字がドット
 	(action . ac-go-into-braces-action) ;; 補完後の動作
 	(symbol . "JS_BOM") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
 	))
 
 
-;;; 辞書7 (JavaScript)
+;;; 辞書7 (JavaScript DOM)
 ;; 色設定
 (defface ac-JS_DOM_mydict-candidate-face
   '((t (:background "#ffcc33" :foreground "#220")))
@@ -256,9 +300,41 @@
   '((candidates . ac-JS_DOM_mydict-cache) ;; 候補の情報源 これ以下はオプション
 	(candidate-face . ac-JS_DOM_mydict-candidate-face) ;; 候補の色設定
 	(selection-face . ac-my-selection-face) ;; 選択中の色設定
+	(prefix . ac-js-dot-prefix) ;; 直前の文字がドット
 	(action . ac-go-into-braces-action) ;; 補完後の動作
 	(symbol . "JS_DOM") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
 	))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;       ac-html       ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'ac-html)
+(defun setup-ac-for-html ()
+  ;; Require ac-html since we are setup html auto completion
+  (require 'ac-html)
+  ;; Require default data provider if you want to use
+  (require 'ac-html-default-data-provider)
+  ;; Enable data providers,
+  ;; currently only default data provider available
+  (ac-html-enable-data-provider 'ac-html-default-data-provider)
+  ;; Let ac-html do some setup
+  (ac-html-setup)
+  ;; Set your ac-source
+  (setq ac-sources '(ac-source-html-tag
+                     ac-source-html-attr
+                     ac-source-html-attrv))
+  ;; Enable auto complete mode
+  (auto-complete-mode)
+  (candidate-face . ac-html-sakura-candidate-face) ;; 候補の色設定
+  (selection-face . ac-my-selection-face) ;; 選択中の色設定
+  )
+(require 'ac-html-csswatcher)
+(ac-html-csswatcher-setup)
+;; or if you prefer company-style names:
+;;  (company-web-csswatcher-setup)
+
+(add-hook 'html-mode-hook 'setup-ac-for-html)
+(add-hook 'web-mode-hook  'setup-ac-for-html)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -268,7 +344,10 @@
 (setq web-mode-ac-sources-alist
 	  '(
 		("html" . (;ac-source-words-in-buffer
-				   ac-source-html-sakura-dict
+				   ;ac-source-html-sakura-dict
+				   ac-source-html-tag
+				   ac-source-html-attribute
+				   ac-source-html-attribute-value
 
 				   ac-source-abbrev
 				   ac-source-words-in-same-mode-buffers
@@ -300,14 +379,18 @@
   (setq ac-sources
 		'(
 		  ac-source-JS_mydict-dict
+		  ac-source-JS_mydict_Math-dict
+		  ac-source-JS_mydict_afterdot-dict
 		  ac-source-JS_BOM_mydict-dict
 		  ac-source-JS_DOM_mydict-dict
+
+		  ac-source-gtags
+		  ac-source-semantic
+		  ac-source-semantic-raw
 
 		  ac-source-abbrev
 		  ac-source-words-in-same-mode-buffers
 		  ac-source-files-in-current-dir
-
-		  `$.'ac-source-css-include3-dict
 
 		  ;; 優先順位で並べる (prefixを指定すると排他的になる; x.に$.が含まれる)
 		  ;; とりあえず jQuery 今は使わないのでコメントアウト

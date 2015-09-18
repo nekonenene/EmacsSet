@@ -1,0 +1,36 @@
+// http://www.w3schools.com/jsref/default.asp より取得
+// 使った正規表現 : Devas で「行単位で検索」のオプションは外して以下を実行
+// ^[ ]*<tr>\s*<td>([^\n]*)</td> -> \1@
+// .*[^@]$ ->
+// ^\n ->  
+// <[^>]*>@? ->
+// @ ->  
+
+
+// Math
+E
+LN2
+LN10
+LOG2E
+LOG10E
+PI
+SQRT1_2
+SQRT2
+abs()
+acos()
+asin()
+atan()
+atan2()
+ceil()
+cos()
+exp()
+floor()
+log()
+max()
+min()
+pow(base, p)
+random()
+round()
+sin()
+sqrt()
+tan()

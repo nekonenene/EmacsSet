@@ -311,6 +311,7 @@
 ;; 文字サイズ
 (set-face-attribute 'linum nil :height 0.75)
 
+;;;;;; 以降、個人設定
 ;; 文字を折り返さない t =yes, nil =no
 ;; (setq-default truncate-lines t)
 
@@ -328,6 +329,10 @@
   )
 (setq-default indent-tabs-mode t)
 (setq-default tab-width 4)
+
+;; カッコの対応関係を光らせる
+(show-paren-mode t)
+(setq-default show-paren-delay 0.8)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -555,8 +560,9 @@
 ;;; @ flymake                                                       ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;; 標準機能の flymeke をインポートする
-(require 'flymake)
-(add-hook 'find-file-hook 'flymake-find-file-hook)
+;; (require 'flymake)
+;; (require 'flymake-my-setting)
+;; (add-hook 'find-file-hook 'flymake-find-file-hook)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -808,21 +814,21 @@
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/auto-complete/dict")
 
 ;; 0秒後に自動で表示
-(setq ac-auto-show-menu 0)
+(setq ac-delay 0.01)
+(setq ac-auto-show-menu 0.01)
+;; クイックヘルプ表示
+(setq ac-quick-help-delay 0.1)
 
 ;; 1文字目を入力したら補完開始
 (setq ac-auto-start 1)
 
-;; color
-;; (set-face-foreground 'ac-completion-face "pink")
-;; (set-face-background 'ac-completion-face "pink")
-;; (set-face-background 'ac-selection-face  "pink")
-;; (set-face-background 'ac-candidate-face  "pink")
+;; default color は theme 内に記述されている
 
 ;; デフォルトの補完内容
 (setq-default ac-sources '(
 						   ac-source-words-in-buffer ;; 現在のバッファの内容
 						   ac-source-abbrev
+						   ac-source-words-in-same-mode-buffers
 						   ))
 
 ;;;; ac-user-dict のインポート                   ;;;;

@@ -6,84 +6,27 @@
 // <[^>]*>@? ->
 // @ ->  
 
-window.addEventListener()
-console.log()
-console.time()
-console.timeEnd()
-log()
-time()
-timeEnd()
 
-// Array
-constructor
-length
-prototype
-concat()
-indexOf()
-join()
-lastIndexOf()
-pop()
-push()
-reverse()
-shift()
-slice()
-sort()
-splice()
-toString()
-unshift()
-valueOf()
+window
+document
+this
+console
+delete
+XMLHttpRequest()
 
-// Date
-constructor
-prototype
-getDate()
-getDay()
-getFullYear()
-getHours()
-getMilliseconds()
-getMinutes()
-getMonth()
-getSeconds()
-getTime()
-getTimezoneOffset()
-getUTCDate()
-getUTCDay()
-getUTCFullYear()
-getUTCHours()
-getUTCMilliseconds()
-getUTCMinutes()
-getUTCMonth()
-getUTCSeconds()
-getYear()
-parse()
-setDate()
-setFullYear()
-setHours()
-setMilliseconds()
-setMinutes()
-setMonth()
-setSeconds()
-setTime()
-setUTCDate()
-setUTCFullYear()
-setUTCHours()
-setUTCMilliseconds()
-setUTCMinutes()
-setUTCMonth()
-setUTCSeconds()
-setYear()
-toDateString()
-toGMTString()
-toISOString()
-toJSON()
-toLocaleDateString()
-toLocaleTimeString()
-toLocaleString()
-toString()
-toTimeString()
-toUTCString()
-UTC()
-valueOf()
+
+// よく使うワード
+error
+get
+set
+JSON
+
+
+// Boolean
+true
+false
+undefined
+
 
 // Global
 Infinity
@@ -108,62 +51,8 @@ Number()
 Date()
 RegExp()
 Error()
+Math.
 
-// Math
-Math
-Math.E
-Math.LN2
-Math.LN10
-Math.LOG2E
-Math.LOG10E
-Math.PI
-Math.SQRT1_2
-Math.SQRT2
-Math.abs()
-Math.acos()
-Math.asin()
-Math.atan()
-Math.atan2()
-Math.ceil()
-Math.cos()
-Math.exp()
-Math.floor()
-Math.log()
-Math.max()
-Math.min()
-Math.pow(base, p)
-Math.random()
-Math.round()
-Math.sin()
-Math.sqrt()
-Math.tan()
-
-E
-LN2
-LN10
-LOG2E
-LOG10E
-PI
-SQRT1_2
-SQRT2
-abs()
-acos()
-asin()
-atan()
-atan2()
-ceil()
-cos()
-exp()
-floor()
-log()
-max()
-min()
-pow(base, p)
-random()
-round()
-sin()
-sqrt()
-tan()
 
 // Number
 constructor
@@ -179,57 +68,6 @@ toPrecision()
 toString()
 valueOf()
 
-// RegExp
-constructor
-global
-ignoreCase
-lastIndex
-multiline
-source
-exec()
-test()
-toString()
-
-// String
-constructor
-length
-prototype
-charAt()
-charCodeAt()
-concat()
-fromCharCode()
-indexOf()
-lastIndexOf()
-localeCompare()
-match()
-replace()
-search()
-slice()
-split()
-substr()
-substring()
-toLocaleLowerCase()
-toLocaleUpperCase()
-toLowerCase()
-toString()
-toUpperCase()
-trim()
-valueOf()
-
-// 一部のブラウザでは動かないので使用注意
-anchor()
-big()
-blink()
-bold()
-fixed()
-fontcolor()
-fontsize()
-italics()
-link()
-small()
-strike()
-sub()
-sup()
 
 // Statements
 break ;
