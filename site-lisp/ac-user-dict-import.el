@@ -305,6 +305,25 @@
 	(symbol . "JS_DOM") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
 	))
 
+
+;;; 辞書-naming (命名によく使うワード)
+;; 色設定
+(defface ac-naming_mydict-candidate-face
+  '((t (:background "#deccbe" :foreground "#220")))
+  "Face for naming_mydict candidates."
+  :group 'auto-complete)
+;; 情報源に辞書ファイルを指定
+(defvar ac-naming_mydict-cache
+  (ac-file-dictionary (concat ac-user-dict-dir "naming_mydict")))
+(defvar ac-source-naming_mydict-dict
+  '((candidates . ac-naming_mydict-cache) ;; 候補の情報源 これ以下はオプション
+	(candidate-face . ac-naming_mydict-candidate-face) ;; 候補の色設定
+	(selection-face . ac-my-selection-face) ;; 選択中の色設定
+	(action . ac-go-into-braces-action) ;; 補完後の動作
+	(symbol . "naming") ;; ライブラリ名 (無理矢理。本来の意図とは違うはず)
+	))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;       ac-html       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -383,6 +402,7 @@
 		  ac-source-JS_mydict_afterdot-dict
 		  ac-source-JS_BOM_mydict-dict
 		  ac-source-JS_DOM_mydict-dict
+		  ac-source-naming_mydict-dict
 
 		  ac-source-gtags
 		  ac-source-semantic

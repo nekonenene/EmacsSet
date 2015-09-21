@@ -1,0 +1,16 @@
+// https://developer.mozilla.org/ja/docs/Web/API
+
+
+// XMLHttpRequest
+// https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest
+arraybuffer
+blob
+document
+text
+json
+abort()
+getAllResponseHeaders()
+getResponseHeader()
+open()
+send()
+setRequestHeader()

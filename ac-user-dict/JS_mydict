@@ -11,14 +11,15 @@ window
 document
 this
 console
+console.log()
 delete
 XMLHttpRequest()
+use strict
 
 
 // よく使うワード
 error
-get
-set
+json
 JSON
 
 

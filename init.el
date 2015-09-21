@@ -561,6 +561,7 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 ;; flymake より 導入が手軽な flycheck を使う
+;; 注意： jshint はインストールが必要。だが、Cygwin版 Emacsでは PATH の関係で動かない
 (require 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 

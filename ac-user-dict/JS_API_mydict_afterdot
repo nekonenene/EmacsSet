@@ -1,0 +1,17 @@
+// https://developer.mozilla.org/ja/docs/Web/API
+
+
+// XMLHttpRequest
+// https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest
+channel
+multipart
+onreadystatechange
+readyState
+response
+responseText
+responseType
+responseXML
+status
+statusText
+upload
+withCredentials
