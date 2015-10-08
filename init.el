@@ -28,7 +28,7 @@
 		 (file-name-as-directory (concat user-emacs-directory "site-lisp")))
 	   )
   (add-to-list 'load-path default-directory)
-  ;;  (add-to-list 'load-path "~/.emacs.d/elpa/")
+;;  (add-to-list 'load-path "~/.emacs.d/elpa/")
   (normal-top-level-add-subdirs-to-load-path)
   )
 
@@ -65,11 +65,11 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 ;; モードラインの表示文字列
-(setq-default w32-ime-mode-line-state-indicator "[Aa] ")
-(setq w32-ime-mode-line-state-indicator-list '("[Aa]" "[あ]" "[Aa]"))
+;; (setq-default w32-ime-mode-line-state-indicator "[Aa] ")
+;; (setq w32-ime-mode-line-state-indicator-list '("[Aa]" "[あ]" "[Aa]"))
 
 ;; IME初期化
-(w32-ime-initialize)
+;; (w32-ime-initialize)
 
 ;; デフォルトIME
 (setq default-input-method "W32-IME")
@@ -88,16 +88,16 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 ;; デフォルト フォント
-(set-face-attribute 'default nil :family "Migu 1M" :height 110)
+(set-face-attribute 'default nil :family "Oxygen Mono" :height 110)
 
 ;; プロポーショナル フォント
-(set-face-attribute 'variable-pitch nil :family "Migu 1M" :height 110)
+(set-face-attribute 'variable-pitch nil :family "Oxygen Mono" :height 110)
 
 ;; 等幅フォント
-(set-face-attribute 'fixed-pitch nil :family "Migu 1M" :height 110)
+(set-face-attribute 'fixed-pitch nil :family "Oxygen Mono" :height 110)
 
 ;; ツールチップ表示フォント
-(set-face-attribute 'tooltip nil :family "Migu 1M" :height 90)
+;(set-face-attribute 'tooltip nil :family "Oxygen Mono" :height 90)
 
 ;;; fontset
 
@@ -710,7 +710,7 @@
 ;;; @ magit                          追加コンテンツ                 ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-(require 'magit)
+;; (require 'magit)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
