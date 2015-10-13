@@ -88,16 +88,16 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 ;; デフォルト フォント
-(set-face-attribute 'default nil :family "Oxygen Mono" :height 110)
+(set-face-attribute 'default nil :family "Migu 1M" :height 110)
 
 ;; プロポーショナル フォント
-(set-face-attribute 'variable-pitch nil :family "Oxygen Mono" :height 110)
+(set-face-attribute 'variable-pitch nil :family "Migu 1M" :height 110)
 
 ;; 等幅フォント
-(set-face-attribute 'fixed-pitch nil :family "Oxygen Mono" :height 110)
+(set-face-attribute 'fixed-pitch nil :family "Migu 1M" :height 110)
 
 ;; ツールチップ表示フォント
-;(set-face-attribute 'tooltip nil :family "Oxygen Mono" :height 90)
+(set-face-attribute 'tooltip nil :family "Migu 1M" :height 90)
 
 ;;; fontset
 
@@ -900,6 +900,11 @@
 (require 'lua-mode)
 (add-to-list 'auto-mode-alist '("\\.lua\\'"        . lua-mode))
 (add-to-list 'auto-mode-alist '("\\(.anm\\|.scn\\|.tra\\|.cam\\|.obj\\)\\'"      . lua-mode))
+
+;; sh - bash, zsh
+(require 'sh-mode)
+(add-to-list 'auto-mode-alist '("\\.bashrc\\'"        . sh-mode))
+(add-to-list 'auto-mode-alist '("\\(.?zshrc\\|.zprofile\\)\\'"      . sh-mode))
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
