@@ -25,10 +25,10 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (let ( (default-directory
-		 (file-name-as-directory (concat user-emacs-directory "site-lisp")))
-	   )
+         (file-name-as-directory (concat user-emacs-directory "site-lisp")))
+       )
   (add-to-list 'load-path default-directory)
-;;  (add-to-list 'load-path "~/.emacs.d/elpa/")
+  ;;  (add-to-list 'load-path "~/.emacs.d/elpa/")
   (normal-top-level-add-subdirs-to-load-path)
   )
 
@@ -72,7 +72,7 @@
 ;; (w32-ime-initialize)
 
 ;; デフォルトIME
-(setq default-input-method "W32-IME")
+(setq default-input-method "MacOSX")
 
 ;; IME変更
 (global-set-key (kbd "C-\\") 'toggle-input-method)
@@ -116,26 +116,26 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (setq default-frame-alist
-	  (append '(
-				;; (width                . 77 ) ; フレーム幅
-				;; (height               . 44 ) ; フレーム高
-				;; (left                 . 81 ) ; 配置左位置
-				;; (top                  .  2 ) ; 配置上位置
-				(line-spacing         . 0  ) ; 文字間隔
-				(left-fringe          . 10 ) ; 左フリンジ幅
-				(right-fringe         . 11 ) ; 右フリンジ幅
-				(menu-bar-lines       . 1  ) ; メニューバー
-				(tool-bar-lines       . 1  ) ; ツールバー
-				(vertical-scroll-bars . 1  ) ; スクロールバー
-				(scroll-bar-width     . 14 ) ; スクロールバー幅
-				(cursor-type          . box) ; カーソル種別
-				(alpha                . 94) ; 透明度 
-				) default-frame-alist) )
+      (append '(
+                ;; (width                . 77 ) ; フレーム幅
+                ;; (height               . 44 ) ; フレーム高
+                ;; (left                 . 81 ) ; 配置左位置
+                ;; (top                  .  2 ) ; 配置上位置
+                (line-spacing         . 0  ) ; 文字間隔
+                (left-fringe          . 10 ) ; 左フリンジ幅
+                (right-fringe         . 11 ) ; 右フリンジ幅
+                (menu-bar-lines       . 1  ) ; メニューバー
+                (tool-bar-lines       . 1  ) ; ツールバー
+                (vertical-scroll-bars . 1  ) ; スクロールバー
+                (scroll-bar-width     . 14 ) ; スクロールバー幅
+                (cursor-type          . box) ; カーソル種別
+                (alpha                . 94) ; 透明度 
+                ) default-frame-alist) )
 (setq initial-frame-alist default-frame-alist)
 
 ;; フレーム タイトル
 (setq frame-title-format
-	  '("emacs " emacs-version (buffer-file-name " - %f")))
+      '("emacs " emacs-version (buffer-file-name " - %f")))
 
 ;; 初期画面の非表示
 (setq inhibit-startup-message nil)
@@ -187,8 +187,8 @@
    ")%] "
    (which-func-mode ("" which-func-format " "))
    (line-number-mode
-	(:eval
-	 (format "L%%l/L%d " (count-lines (point-max) 1) )))
+    (:eval
+     (format "L%%l/L%d " (count-lines (point-max) 1) )))
    (column-number-mode " C%c ")
    (-3 . "%p")
    )
@@ -243,40 +243,40 @@
 (unless (facep 'cursor-ime-off)
   (make-face 'cursor-ime-off)
   (set-face-attribute 'cursor-ime-off nil
-					  :background "DarkRed" :foreground "White")
+                      :background "DarkRed" :foreground "White")
   )
 (unless (facep 'cursor-ime-on)
   (make-face 'cursor-ime-on)
   (set-face-attribute 'cursor-ime-on nil
-					  :background "DarkGreen" :foreground "White")
+                      :background "DarkGreen" :foreground "White")
   )
 
 ;; IME無効／有効時のカーソルカラー設定
 (add-hook
  'input-method-inactivate-hook
  '(lambda()
-	(if (facep 'cursor-ime-off)
-		(let ( (fg (face-attribute 'cursor-ime-off :foreground))
-			   (bg (face-attribute 'cursor-ime-off :background)) )
-		  (set-face-attribute 'cursor nil :foreground fg :background bg)
-		  )
-	  )
-	)
+    (if (facep 'cursor-ime-off)
+        (let ( (fg (face-attribute 'cursor-ime-off :foreground))
+               (bg (face-attribute 'cursor-ime-off :background)) )
+          (set-face-attribute 'cursor nil :foreground fg :background bg)
+          )
+      )
+    )
  )
 (add-hook
  'input-method-activate-hook
  '(lambda()
-	(if (facep 'cursor-ime-on)
-		(let ( (fg (face-attribute 'cursor-ime-on :foreground))
-			   (bg (face-attribute 'cursor-ime-on :background)) )
-		  (set-face-attribute 'cursor nil :foreground fg :background bg)
-		  )
-	  )
-	)
+    (if (facep 'cursor-ime-on)
+        (let ( (fg (face-attribute 'cursor-ime-on :foreground))
+               (bg (face-attribute 'cursor-ime-on :background)) )
+          (set-face-attribute 'cursor nil :foreground fg :background bg)
+          )
+      )
+    )
  )
 
 ;; バッファ切り替え時の状態引継ぎ設定
-(setq w32-ime-buffer-switch-p nil)
+;; (setq w32-ime-buffer-switch-p nil)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -289,11 +289,11 @@
 (defvar linum-line-number 0)
 (declare-function linum-update-current "linum" ())
 (defadvice linum-update-current
-	(around linum-update-current-around activate compile)
+    (around linum-update-current-around activate compile)
   (unless (= linum-line-number (line-number-at-pos))
-	(setq linum-line-number (line-number-at-pos))
-	ad-do-it
-	))
+    (setq linum-line-number (line-number-at-pos))
+    ad-do-it
+    ))
 
 ;; バッファ中の行番号表示の遅延設定
 (defvar linum-delay nil)
@@ -325,9 +325,10 @@
 (defun insert-tab-char ()
   "insert a tab char. (ASCII 9, \t)"
   (interactive)
-  (insert "\t")
+  ;; (insert "\t")
+  (insert " ")
   )
-(setq-default indent-tabs-mode t)
+(setq-default indent-tabs-mode nil)  ;; ソフトタブなら nil, ハードタブなら t
 (setq-default tab-width 4)
 
 ;; カッコの対応関係を光らせる
@@ -435,8 +436,8 @@
 
 ;; ファイルオープン時のバックアップ（~）の格納ディレクトリ
 (setq backup-directory-alist
-	  (cons (cons "\\.*$" (expand-file-name "/tmp/emacsbk"))
-			backup-directory-alist))
+      (cons (cons "\\.*$" (expand-file-name "/tmp/emacsbk"))
+            backup-directory-alist))
 
 ;; 編集中ファイルの自動バックアップ
 (setq backup-inhibited nil)
@@ -456,7 +457,7 @@
 
 ;; 編集中ファイル（##）の格納ディレクトリ
 (setq auto-save-file-name-transforms
-	  `((".*" ,(expand-file-name "/tmp/emacsbk") t)))
+      `((".*" ,(expand-file-name "/tmp/emacsbk") t)))
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -505,26 +506,26 @@
 (defadvice scroll-down (around scroll-down activate compile)
   (interactive)
   (let (
-		(bgn-num (+ 1 (count-lines (point-min) (point))))
-		)
-	(if (< bgn-num (window-height))
-		(goto-char (point-min))
-	  ad-do-it) ))
+        (bgn-num (+ 1 (count-lines (point-min) (point))))
+        )
+    (if (< bgn-num (window-height))
+        (goto-char (point-min))
+      ad-do-it) ))
 
 ;; バッファの先頭までスクロールアップ
 (defadvice scroll-up (around scroll-up activate compile)
   (interactive)
   (let (
-		(bgn-num (+ 1 (count-lines (point-min) (point))))
-		(end-num nil)
-		)
-	(save-excursion
-	  (goto-char (point-max))
-	  (setq end-num (+ 1 (count-lines (point-min) (point))))
-	  )
-	(if (< (- (- end-num bgn-num) (window-height)) 0)
-		(goto-char (point-max))
-	  ad-do-it) ))
+        (bgn-num (+ 1 (count-lines (point-min) (point))))
+        (end-num nil)
+        )
+    (save-excursion
+      (goto-char (point-max))
+      (setq end-num (+ 1 (count-lines (point-min) (point))))
+      )
+    (if (< (- (- end-num bgn-num) (window-height)) 0)
+        (goto-char (point-max))
+      ad-do-it) ))
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -533,12 +534,12 @@
 
 ;; マウスの右クリックの割り当て(押しながらの操作)をはずす
 (if window-system (progn
-					(global-unset-key [down-mouse-3])
-					;; マウスの右クリックメニューを使えるようにする
-					(defun bingalls-edit-menu (event)  (interactive "e")
-						   (popup-menu menu-bar-edit-menu))
-					(global-set-key [mouse-3] 'bingalls-edit-menu)
-					)
+                    (global-unset-key [down-mouse-3])
+                    ;; マウスの右クリックメニューを使えるようにする
+                    (defun bingalls-edit-menu (event)  (interactive "e")
+                           (popup-menu menu-bar-edit-menu))
+                    (global-set-key [mouse-3] 'bingalls-edit-menu)
+                    )
   )
 
 
@@ -577,8 +578,8 @@
 
 ;; ボタン非表示
 (dolist (btn '(tabbar-buffer-home-button
-			   tabbar-scroll-left-button
-			   tabbar-scroll-right-button))
+               tabbar-scroll-left-button
+               tabbar-scroll-right-button))
   (set btn (cons (cons "" nil) (cons "" nil)))
   )
 
@@ -607,17 +608,17 @@
 (set-face-background 'whitespace-space nil)
 (set-face-bold-p 'whitespace-space t)
 ;; Tabの色		theme.el - whitespace-tab 内でも指定されている
-										;(set-face-foreground 'whitespace-tab "DarkOliveGreen1")
-										;(set-face-background 'whitespace-tab nil)
-										;(set-face-underline  'whitespace-tab t)
+                                        ;(set-face-foreground 'whitespace-tab "DarkOliveGreen1")
+                                        ;(set-face-background 'whitespace-tab nil)
+                                        ;(set-face-underline  'whitespace-tab t)
 
 ;; 全角スペースとTabのみ強調（デフォだと半角スペースや改行を強調したりする）
 (setq whitespace-style '(face tabs tab-mark spaces space-mark))
 (setq whitespace-space-regexp "\\(\x3000+\\)")
 (setq whitespace-display-mappings
-	  '((space-mark ?\x3000 [?\□])
-		(tab-mark   ?\t   [?\xBB ?\t])
-		))
+      '((space-mark ?\x3000 [?\□])
+        (tab-mark   ?\t   [?\xBB ?\t])
+        ))
 
 (global-whitespace-mode 1) ; 全角スペースを常に表示
 
@@ -645,8 +646,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; addrev の設定  ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
-										;(setq addrev-file-name "~/.emacs.d/abbrev_defs") ;; ここ以外指定できないっぽい
-										;(setq save-abbrevs t)
+                                        ;(setq addrev-file-name "~/.emacs.d/abbrev_defs") ;; ここ以外指定できないっぽい
+                                        ;(setq save-abbrevs t)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -674,9 +675,9 @@
 
 (require 'package)
 (add-to-list 'package-archives
-			 '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives
-			 '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
 
@@ -698,7 +699,7 @@
 ;; (require 'pcre2el)
 
 ;; multiple-cursors ( https://github.com/magnars/multiple-cursors.el ) を使っている場合は下１行をコメント解除
-										; (global-set-key (kbd "C-c m") 'vr/mc-mark)
+                                        ; (global-set-key (kbd "C-c m") 'vr/mc-mark)
 ;; 普段の 'query-replace-regexp を visual-regexp に
 (global-set-key (kbd "C-x C-r") 'vr/query-replace)
 (global-set-key (kbd "C-S-x C-S-r") 'vr/replace)
@@ -710,7 +711,7 @@
 ;;; @ magit                          追加コンテンツ                 ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; (require 'magit)
+(require 'magit)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -827,10 +828,10 @@
 
 ;; デフォルトの補完内容
 (setq-default ac-sources '(
-						   ac-source-words-in-buffer ;; 現在のバッファの内容
-						   ac-source-abbrev
-						   ac-source-words-in-same-mode-buffers
-						   ))
+                           ac-source-words-in-buffer ;; 現在のバッファの内容
+                           ac-source-abbrev
+                           ac-source-words-in-same-mode-buffers
+                           ))
 
 ;;;; ac-user-dict のインポート                   ;;;;
 ;;;; http://fukuyama.co/emacs-auto-complete      ;;;;
@@ -863,7 +864,7 @@
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'"     . web-mode))
 
 (add-to-list 'auto-mode-alist '("\\(.html?\\|.css\\|.php\\)\\'"
-								. web-mode))
+                                . web-mode))
 
 (require 'web-mode-my-setting)
 
@@ -893,8 +894,8 @@
 (autoload 'powershell-mode "powershell-mode" "A editing mode for Microsoft PowerShell." t)
 (add-to-list 'auto-mode-alist '("\\.ps1\\'" . powershell-mode))
 (add-hook 'powershell-mode-hook '(lambda()
-								   (auto-complete-mode t)
-								   ))
+                                   (auto-complete-mode t)
+                                   ))
 
 ;; lua
 (require 'lua-mode)
@@ -902,9 +903,14 @@
 (add-to-list 'auto-mode-alist '("\\(.anm\\|.scn\\|.tra\\|.cam\\|.obj\\)\\'"      . lua-mode))
 
 ;; sh - bash, zsh
-(require 'sh-mode)
+;; (require 'sh-mode)
 (add-to-list 'auto-mode-alist '("\\.bashrc\\'"        . sh-mode))
 (add-to-list 'auto-mode-alist '("\\(.?zshrc\\|.zprofile\\)\\'"      . sh-mode))
+
+;; objective-c
+(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@implementation" . objc-mode))
+(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@interface" . objc-mode))
+(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@protocol" . objc-mode))
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -913,8 +919,8 @@
 
 ;; テーマ格納ディレクトリのパス追加
 (add-to-list 'custom-theme-load-path
-			 (file-name-as-directory (concat user-emacs-directory "theme"))
-			 )
+             (file-name-as-directory (concat user-emacs-directory "theme"))
+             )
 
 ;; テーマ選択
 ;; (load-theme 'solarized-light t)
@@ -934,7 +940,7 @@
 (setq server-socket-dir "~/.emacs.d")
 (unless (server-running-p)
   (server-start)
-)
+  )
 
 
 (custom-set-variables
