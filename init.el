@@ -584,9 +584,9 @@
   )
 
 ;; タブ切替にマウスホイールを使用（0：有効，-1：無効）
-(call-interactively 'tabbar-mwheel-mode -1)
-(remove-hook 'tabbar-mode-hook      'tabbar-mwheel-follow)
-(remove-hook 'mouse-wheel-mode-hook 'tabbar-mwheel-follow)
+;; (call-interactively 'tabbar-mwheel-mode -1)
+;; (remove-hook 'tabbar-mode-hook      'tabbar-mwheel-follow)
+;; (remove-hook 'mouse-wheel-mode-hook 'tabbar-mwheel-follow)
 
 ;; タブグループを使用（t：有効，nil：無効）
 (defvar tabbar-buffer-groups-function nil)
