@@ -36,6 +36,9 @@
 ;;; @ language - coding system                                      ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
+;; 言語指定
+(set-language-environment "Japanese")
+
 ;; デフォルトの文字コード
 (set-default-coding-systems 'utf-8-unix)
 
