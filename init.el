@@ -52,9 +52,10 @@
 (set-keyboard-coding-system 'utf-8-unix)
 
 ;; サブプロセスのデフォルト文字コード
-(setq default-process-coding-system '(undecided-dos . utf-8-unix))
+(setq default-process-coding-system '(utf-8-unix))
 
-
+(set-default 'buffer-file-coding-system 'utf-8-unix)
+             
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ key binding - keyboard                                        ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
