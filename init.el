@@ -88,16 +88,16 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 ;; デフォルト フォント
-(set-face-attribute 'default nil :family "Migu 1M" :height 110)
+(set-face-attribute 'default nil :family "Migu 1M" :height 121)
 
 ;; プロポーショナル フォント
-(set-face-attribute 'variable-pitch nil :family "Migu 1M" :height 110)
+(set-face-attribute 'variable-pitch nil :family "Migu 1M")
 
 ;; 等幅フォント
-(set-face-attribute 'fixed-pitch nil :family "Migu 1M" :height 110)
+(set-face-attribute 'fixed-pitch nil :family "Migu 1M")
 
 ;; ツールチップ表示フォント
-(set-face-attribute 'tooltip nil :family "Migu 1M" :height 90)
+(set-face-attribute 'tooltip nil :family "Migu 1M" :height 110)
 
 ;;; fontset
 
@@ -375,18 +375,18 @@
   '(lambda() (interactive) (isearch-done)))
 
 ;; 日本語の検索文字列をミニバッファに表示
-(define-key isearch-mode-map (kbd "<compend>")
-  '(lambda() (interactive) (isearch-update)))
-(define-key isearch-mode-map (kbd "<kanji>")
-  'isearch-toggle-input-method)
-(add-hook
- 'isearch-mode-hook
- '(lambda() (setq w32-ime-composition-window (minibuffer-window)))
- )
-(add-hook
- 'isearch-mode-end-hook
- '(lambda() (setq w32-ime-composition-window nil))
- )
+;; (define-key isearch-mode-map (kbd "<compend>")
+;;   '(lambda() (interactive) (isearch-update)))
+;; (define-key isearch-mode-map (kbd "<kanji>")
+;;   'isearch-toggle-input-method)
+;; (add-hook
+;;  'isearch-mode-hook
+;;  '(lambda() (setq w32-ime-composition-window (minibuffer-window)))
+;;  )
+;; (add-hook
+;;  'isearch-mode-end-hook
+;;  '(lambda() (setq w32-ime-composition-window nil))
+;;  )
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -548,9 +548,8 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (require 'shell)
-(setq explicit-shell-file-name "bash.exe")
+(setq explicit-shell-file-name "zsh.exe")
 (setq shell-command-switch "-c")
-(setq shell-file-name "bash.exe")
 
 ;; (M-! and M-| and compile.el)
 (setq shell-file-name "bash.exe")
@@ -563,8 +562,8 @@
 
 ;; flymake より 導入が手軽な flycheck を使う
 ;; 注意： jshint はインストールが必要。だが、Cygwin版 Emacsでは PATH の関係で動かない
-(require 'flycheck)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+; (require 'flycheck)
+; (add-hook 'after-init-hook #'global-flycheck-mode)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -639,8 +638,8 @@
 ;; daddrev : M - / で実行。バッファ内の単語を補完
 ;; auto-complete の簡易版みたいな、Emacs標準機能
 
-(load "dabbrev-ja")  ; 日本語の補完を拾いすぎないように改善
-(require 'dabbrev-highlight)  ; どこから補完してきたのか、単語をハイライト
+; (load "dabbrev-ja")  ; 日本語の補完を拾いすぎないように改善
+; (require 'dabbrev-highlight)  ; どこから補完してきたのか、単語をハイライト
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -935,13 +934,15 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 ;; emacs-server起動
-(require 'server)
-(defun server-ensure-safe-dir (dir) "Noop" t)
-(setq server-socket-dir "~/.emacs.d")
+;; (require 'server)
+;; (defun server-ensure-safe-dir (dir) "Noop" t)
+;; (setq server-socket-dir "~/.emacs.d")
+;; (unless (server-running-p)
+;;   (server-start)
+;;   )
 (unless (server-running-p)
   (server-start)
   )
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
