@@ -57,34 +57,23 @@
 (set-default 'buffer-file-coding-system 'utf-8-unix)
              
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ key binding - keyboard                                        ;;;
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-
-;; Altキーを使用せずにMetaキーを使用
-;; (setq w32-alt-is-meta nil)
-
-
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ language - input method                                       ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; モードラインの表示文字列
-;; (setq-default w32-ime-mode-line-state-indicator "[Aa] ")
-;; (setq w32-ime-mode-line-state-indicator-list '("[Aa]" "[あ]" "[Aa]"))
-
-;; IME初期化
-;; (w32-ime-initialize)
-
 ;; デフォルトIME
 (setq default-input-method "MacOSX")
+;(setq ns-command-modifier 'super)
 
 ;; IME変更
 (global-set-key (kbd "C-\\") 'toggle-input-method)
 
+(setq mac-command-modifier 'super)
+(setq mac-option-modifier  'meta )
+
 ;; 漢字/変換キー入力時のエラーメッセージ抑止
-(global-set-key (kbd "<A-kanji>") 'ignore)
-(global-set-key (kbd "<M-kanji>") 'ignore)
-(global-set-key (kbd "<kanji>") 'ignore)
+; (global-set-key (kbd "<A-kanji>") 'ignore)
+; (global-set-key (kbd "<M-kanji>") 'ignore)
+; (global-set-key (kbd "<kanji>") 'ignore)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -243,45 +232,6 @@
 ;; 非アクティブウィンドウのカーソル表示
 (setq-default cursor-in-non-selected-windows t)
 
-;; IME無効／有効時のカーソルカラー定義
-(unless (facep 'cursor-ime-off)
-  (make-face 'cursor-ime-off)
-  (set-face-attribute 'cursor-ime-off nil
-                      :background "DarkRed" :foreground "White")
-  )
-(unless (facep 'cursor-ime-on)
-  (make-face 'cursor-ime-on)
-  (set-face-attribute 'cursor-ime-on nil
-                      :background "DarkGreen" :foreground "White")
-  )
-
-;; IME無効／有効時のカーソルカラー設定
-(add-hook
- 'input-method-inactivate-hook
- '(lambda()
-    (if (facep 'cursor-ime-off)
-        (let ( (fg (face-attribute 'cursor-ime-off :foreground))
-               (bg (face-attribute 'cursor-ime-off :background)) )
-          (set-face-attribute 'cursor nil :foreground fg :background bg)
-          )
-      )
-    )
- )
-(add-hook
- 'input-method-activate-hook
- '(lambda()
-    (if (facep 'cursor-ime-on)
-        (let ( (fg (face-attribute 'cursor-ime-on :foreground))
-               (bg (face-attribute 'cursor-ime-on :background)) )
-          (set-face-attribute 'cursor nil :foreground fg :background bg)
-          )
-      )
-    )
- )
-
-;; バッファ切り替え時の状態引継ぎ設定
-;; (setq w32-ime-buffer-switch-p nil)
-
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ screen - linum                                                ;;;
@@ -289,21 +239,11 @@
 
 (require 'linum)
 
-;; 行移動を契機に描画
-(defvar linum-line-number 0)
-(declare-function linum-update-current "linum" ())
-(defadvice linum-update-current
-    (around linum-update-current-around activate compile)
-  (unless (= linum-line-number (line-number-at-pos))
-    (setq linum-line-number (line-number-at-pos))
-    ad-do-it
-    ))
-
 ;; バッファ中の行番号表示の遅延設定
-(defvar linum-delay nil)
-(setq linum-delay t)
-(defadvice linum-schedule (around linum-schedule-around () activate)
-  (run-with-idle-timer 1.0 nil #'linum-update-current))
+;; (defvar linum-delay nil)
+;; (setq linum-delay t)
+;; (defadvice linum-schedule (around linum-schedule-around () activate)
+;;   (run-with-idle-timer 1.0 nil #'linum-update-current))
 
 ;; 行番号の書式
 (defvar linum-format nil)
@@ -332,7 +272,7 @@
   ;; (insert "\t")
   (insert " ")
   )
-(setq-default indent-tabs-mode nil)  ;; ソフトタブなら nil, ハードタブなら t
+(setq-default indent-tabs-mode t)  ;; ソフトタブなら nil, ハードタブなら t
 (setq-default tab-width 4)
 
 ;; カッコの対応関係を光らせる
@@ -506,31 +446,6 @@
 ;; スクロールダウン
 ;;(global-set-key (kbd "C-z") 'scroll-down)
 
-;; バッファの最後までスクロールダウン
-(defadvice scroll-down (around scroll-down activate compile)
-  (interactive)
-  (let (
-        (bgn-num (+ 1 (count-lines (point-min) (point))))
-        )
-    (if (< bgn-num (window-height))
-        (goto-char (point-min))
-      ad-do-it) ))
-
-;; バッファの先頭までスクロールアップ
-(defadvice scroll-up (around scroll-up activate compile)
-  (interactive)
-  (let (
-        (bgn-num (+ 1 (count-lines (point-min) (point))))
-        (end-num nil)
-        )
-    (save-excursion
-      (goto-char (point-max))
-      (setq end-num (+ 1 (count-lines (point-min) (point))))
-      )
-    (if (< (- (- end-num bgn-num) (window-height)) 0)
-        (goto-char (point-max))
-      ad-do-it) ))
-
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; 右クリックの挙動を変更                                          ;;;
@@ -642,15 +557,15 @@
 ;; daddrev : M - / で実行。バッファ内の単語を補完
 ;; auto-complete の簡易版みたいな、Emacs標準機能
 
-; (load "dabbrev-ja")  ; 日本語の補完を拾いすぎないように改善
-; (require 'dabbrev-highlight)  ; どこから補完してきたのか、単語をハイライト
+(load "dabbrev-ja")  ; 日本語の補完を拾いすぎないように改善
+(require 'dabbrev-highlight)  ; どこから補完してきたのか、単語をハイライト
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; addrev の設定  ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;(setq addrev-file-name "~/.emacs.d/abbrev_defs") ;; ここ以外指定できないっぽい
-                                        ;(setq save-abbrevs t)
+; (setq addrev-file-name "~/.emacs.d/abbrev_defs") ;; ここ以外指定できないっぽい
+(setq save-abbrevs t)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -941,9 +856,6 @@
 ;; (require 'server)
 ;; (defun server-ensure-safe-dir (dir) "Noop" t)
 ;; (setq server-socket-dir "~/.emacs.d")
-;; (unless (server-running-p)
-;;   (server-start)
-;;   )
 (unless (server-running-p)
   (server-start)
   )
