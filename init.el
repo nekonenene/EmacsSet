@@ -67,13 +67,9 @@
 ;; IME変更
 (global-set-key (kbd "C-\\") 'toggle-input-method)
 
+; Command キー、Option キーの定義
 (setq mac-command-modifier 'super)
 (setq mac-option-modifier  'meta )
-
-;; 漢字/変換キー入力時のエラーメッセージ抑止
-; (global-set-key (kbd "<A-kanji>") 'ignore)
-; (global-set-key (kbd "<M-kanji>") 'ignore)
-; (global-set-key (kbd "<kanji>") 'ignore)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -81,7 +77,7 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 ;; デフォルト フォント
-(set-face-attribute 'default nil :family "Migu 1M" :height 121)
+(set-face-attribute 'default nil :family "Migu 1M" :height 122)
 
 ;; プロポーショナル フォント
 (set-face-attribute 'variable-pitch nil :family "Migu 1M")
