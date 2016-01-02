@@ -68,8 +68,8 @@
 (global-set-key (kbd "C-\\") 'toggle-input-method)
 
 ; Command キー、Option キーの定義
-(setq mac-command-modifier 'super)
-(setq mac-option-modifier  'meta )
+(setq mac-command-modifier 'super )
+(setq mac-option-modifier  'meta  )
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -185,18 +185,18 @@
 (setq mode-line-frame-identification " ")
 
 ;; cp932エンコードの表記変更
-(coding-system-put 'cp932 :mnemonic ?P)
-(coding-system-put 'cp932-dos :mnemonic ?P)
+(coding-system-put 'cp932      :mnemonic ?P)
+(coding-system-put 'cp932-dos  :mnemonic ?P)
 (coding-system-put 'cp932-unix :mnemonic ?P)
-(coding-system-put 'cp932-mac :mnemonic ?P)
+(coding-system-put 'cp932-mac  :mnemonic ?P)
 
 ;; UTF-8エンコードの表記変更
 (coding-system-put 'utf-8 :mnemonic ?U)
 (coding-system-put 'utf-8-with-signature :mnemonic ?u)
 
 ;; 改行コードの表記追加
-(setq eol-mnemonic-dos       ":Dos ")
-(setq eol-mnemonic-mac       ":Mac ")
+(setq eol-mnemonic-dos       ":Win ") ; CR/LF
+(setq eol-mnemonic-mac       ":CR  ")
 (setq eol-mnemonic-unix      ":Unx ")
 (setq eol-mnemonic-undecided ":??? ") 
 
@@ -313,21 +313,6 @@
 ;; C-gで検索を終了
 (define-key isearch-mode-map (kbd "C-g")
   '(lambda() (interactive) (isearch-done)))
-
-;; 日本語の検索文字列をミニバッファに表示
-;; (define-key isearch-mode-map (kbd "<compend>")
-;;   '(lambda() (interactive) (isearch-update)))
-;; (define-key isearch-mode-map (kbd "<kanji>")
-;;   'isearch-toggle-input-method)
-;; (add-hook
-;;  'isearch-mode-hook
-;;  '(lambda() (setq w32-ime-composition-window (minibuffer-window)))
-;;  )
-;; (add-hook
-;;  'isearch-mode-end-hook
-;;  '(lambda() (setq w32-ime-composition-window nil))
-;;  )
-
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ search - migemo                                               ;;;
@@ -631,6 +616,32 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; ★ 俺キーバインド     key-bind  keybind                         ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
+
+;; Command キーらしい動きをするように設定
+(global-set-key (kbd "s-r")   'query-replace)
+(global-set-key (kbd "s-o")   'recentf-open-files)
+(global-set-key (kbd "s-;")   'comment-dwim)
+(global-set-key (kbd "s-g")   'magit-status)
+(global-set-key (kbd "s-w")   'kill-buffer)
+(global-set-key (kbd "s-f")   'find-file)
+(global-set-key (kbd "s-s")   'save-buffer)
+(global-set-key (kbd "s-S-s") 'write-file)
+(global-set-key (kbd "s-w")   'kill-buffer)
+(global-set-key (kbd "s-z")   'advertised-undo)
+(global-set-key (kbd "s-x")   'kill-region)
+(global-set-key (kbd "s-c")   'copy-region-as-kill)
+(global-set-key (kbd "s-v")   'yank)
+(global-set-key (kbd "s-S-v") 'yank-pop)
+(global-set-key (kbd "s-a")   'mark-whole-buffer)
+(global-set-key (kbd "s-p")   'print-buffer)
+(global-set-key (kbd "s-q")   'save-buffers-kill-emacs)
+(global-set-key (kbd "s-S-q") 'kill-emacs)
+
+(global-set-key (kbd "<s-right>") 'end-of-line)
+(global-set-key (kbd "<s-left>")  'beginning-of-line)
+(global-set-key (kbd "<s-down>")  'scroll-up)
+(global-set-key (kbd "<s-up>")    'scroll-down)
+
 
 ;; 元に戻すを横着する
 (define-key global-map (kbd "C-z") 'undo)
