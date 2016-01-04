@@ -72,7 +72,7 @@
 ;; (w32-ime-initialize)
 
 ;; デフォルトIME
-(setq default-input-method "W32-IME")
+;; (setq default-input-method "W32-IME")
 
 ;; IME変更
 (global-set-key (kbd "C-\\") 'toggle-input-method)
@@ -88,13 +88,13 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 ;; デフォルト フォント
-(set-face-attribute 'default nil :family "Oxygen Mono" :height 110)
+(set-face-attribute 'default nil :family "Migu 1M" :height 110)
 
 ;; プロポーショナル フォント
-(set-face-attribute 'variable-pitch nil :family "Oxygen Mono" :height 110)
+(set-face-attribute 'variable-pitch nil :family "Migu 1M" :height 110)
 
 ;; 等幅フォント
-(set-face-attribute 'fixed-pitch nil :family "Oxygen Mono" :height 110)
+(set-face-attribute 'fixed-pitch nil :family "Migu 1M" :height 110)
 
 ;; ツールチップ表示フォント
 ;(set-face-attribute 'tooltip nil :family "Oxygen Mono" :height 90)
@@ -581,11 +581,6 @@
 			   tabbar-scroll-right-button))
   (set btn (cons (cons "" nil) (cons "" nil)))
   )
-
-;; タブ切替にマウスホイールを使用（0：有効，-1：無効）
-(call-interactively 'tabbar-mwheel-mode -1)
-(remove-hook 'tabbar-mode-hook      'tabbar-mwheel-follow)
-(remove-hook 'mouse-wheel-mode-hook 'tabbar-mwheel-follow)
 
 ;; タブグループを使用（t：有効，nil：無効）
 (defvar tabbar-buffer-groups-function nil)
