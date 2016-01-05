@@ -387,33 +387,6 @@
  '(lambda() (setq w32-ime-composition-window nil))
  )
 
-
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ search - migemo                                               ;;;
-;;;   https://github.com/emacs-jp/migemo                            ;;;
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-
-;; (require 'migemo)
-
-;; (defvar migemo-command nil)
-;; (setq migemo-command "cmigemo")
-
-;; (defvar migemo-options nil)
-;; (setq migemo-options '("-q" "--emacs"))
-
-;; (defvar migemo-dictionary nil)
-;; (setq migemo-dictionary "C:/emacs/cmigemo-win32/dict/utf-8/migemo-dict")
-
-;; (defvar migemo-user-dictionary nil)
-
-;; (defvar migemo-regex-dictionary nil)
-
-;; (defvar migemo-coding-system nil)
-;; (setq migemo-coding-system 'utf-8-unix)
-
-;; (load-library "migemo")
-
-
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ search - hi-lock（ハイライト）を有効に                        ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -562,8 +535,8 @@
 
 ;; flymake より 導入が手軽な flycheck を使う
 ;; 注意： jshint はインストールが必要。だが、Cygwin版 Emacsでは PATH の関係で動かない
-(require 'flycheck)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+; (require 'flycheck)
+; (add-hook 'after-init-hook #'global-flycheck-mode)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
