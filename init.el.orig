@@ -53,6 +53,12 @@
 ;; IME初期化
 ;; (w32-ime-initialize)
 
+<<<<<<< 1be5060ec340340ee35572baf4377e9496a3d6f1
+;; デフォルトIME
+(setq default-input-method "MacOSX")
+
+=======
+>>>>>>> migemo と完全にさよなら
 ;; IME変更
 (global-set-key (kbd "C-\\") 'toggle-input-method)
 
@@ -219,6 +225,45 @@
 (setq-default cursor-in-non-selected-windows t)
 
 ;; IME無効／有効時のカーソルカラー定義
+<<<<<<< 1be5060ec340340ee35572baf4377e9496a3d6f1
+(unless (facep 'cursor-ime-off)
+  (make-face 'cursor-ime-off)
+  (set-face-attribute 'cursor-ime-off nil
+                      :background "DarkRed" :foreground "White")
+  )
+(unless (facep 'cursor-ime-on)
+  (make-face 'cursor-ime-on)
+  (set-face-attribute 'cursor-ime-on nil
+                      :background "DarkGreen" :foreground "White")
+  )
+
+;; IME無効／有効時のカーソルカラー設定
+(add-hook
+ 'input-method-inactivate-hook
+ '(lambda()
+    (if (facep 'cursor-ime-off)
+        (let ( (fg (face-attribute 'cursor-ime-off :foreground))
+               (bg (face-attribute 'cursor-ime-off :background)) )
+          (set-face-attribute 'cursor nil :foreground fg :background bg)
+          )
+      )
+    )
+ )
+(add-hook
+ 'input-method-activate-hook
+ '(lambda()
+    (if (facep 'cursor-ime-on)
+        (let ( (fg (face-attribute 'cursor-ime-on :foreground))
+               (bg (face-attribute 'cursor-ime-on :background)) )
+          (set-face-attribute 'cursor nil :foreground fg :background bg)
+          )
+      )
+    )
+ )
+
+;; バッファ切り替え時の状態引継ぎ設定
+;; (setq w32-ime-buffer-switch-p nil)
+=======
 ;; (unless (facep 'cursor-ime-off)
 ;;   (make-face 'cursor-ime-off)
 ;;   (set-face-attribute 'cursor-ime-off nil
@@ -256,6 +301,7 @@
 
 ;; バッファ切り替え時の状態引継ぎ設定
 ;(setq w32-ime-buffer-switch-p nil)
+>>>>>>> migemo と完全にさよなら
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -456,6 +502,31 @@
 ;;(global-set-key (kbd "C-z") 'scroll-down)
 
 ;; バッファの最後までスクロールダウン
+<<<<<<< 1be5060ec340340ee35572baf4377e9496a3d6f1
+(defadvice scroll-down (around scroll-down activate compile)
+  (interactive)
+  (let (
+        (bgn-num (+ 1 (count-lines (point-min) (point))))
+        )
+    (if (< bgn-num (window-height))
+        (goto-char (point-min))
+      ad-do-it) ))
+
+;; バッファの先頭までスクロールアップ
+(defadvice scroll-up (around scroll-up activate compile)
+  (interactive)
+  (let (
+        (bgn-num (+ 1 (count-lines (point-min) (point))))
+        (end-num nil)
+        )
+    (save-excursion
+      (goto-char (point-max))
+      (setq end-num (+ 1 (count-lines (point-min) (point))))
+      )
+    (if (< (- (- end-num bgn-num) (window-height)) 0)
+        (goto-char (point-max))
+      ad-do-it) ))
+=======
 ;; (defadvice scroll-down (around scroll-down activate compile)
 ;;   (interactive)
 ;;   (let (
@@ -479,6 +550,7 @@
 ;; 	(if (< (- (- end-num bgn-num) (window-height)) 0)
 ;; 		(goto-char (point-max))
 ;; 	  ad-do-it) ))
+>>>>>>> migemo と完全にさよなら
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
