@@ -77,7 +77,7 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 ;; デフォルト フォント
-(set-face-attribute 'default nil :family "Migu 1M" :height 122)
+(set-face-attribute 'default nil :family "Migu 1M" :height 132)
 
 ;; プロポーショナル フォント
 (set-face-attribute 'variable-pitch nil :family "Migu 1M")
@@ -86,7 +86,7 @@
 (set-face-attribute 'fixed-pitch nil :family "Migu 1M")
 
 ;; ツールチップ表示フォント
-(set-face-attribute 'tooltip nil :family "Migu 1M" :height 110)
+(set-face-attribute 'tooltip nil :family "Migu 1M" :height 120)
 
 ;;; fontset
 
