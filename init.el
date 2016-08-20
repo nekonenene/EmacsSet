@@ -55,7 +55,7 @@
 (setq default-process-coding-system '(utf-8-unix))
 
 (set-default 'buffer-file-coding-system 'utf-8-unix)
-             
+
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ language - input method                                       ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -118,7 +118,7 @@
                 (vertical-scroll-bars . 1  ) ; スクロールバー
                 (scroll-bar-width     . 14 ) ; スクロールバー幅
                 (cursor-type          . box) ; カーソル種別
-                (alpha                . 94) ; 透明度 
+                (alpha                . 94) ; 透明度
                 ) default-frame-alist) )
 (setq initial-frame-alist default-frame-alist)
 
@@ -198,7 +198,7 @@
 (setq eol-mnemonic-dos       ":Win ") ; CR/LF
 (setq eol-mnemonic-mac       ":CR  ")
 (setq eol-mnemonic-unix      ":Unx ")
-(setq eol-mnemonic-undecided ":??? ") 
+(setq eol-mnemonic-undecided ":??? ")
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -448,11 +448,11 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (require 'shell)
-(setq explicit-shell-file-name "zsh.exe")
+(setq explicit-shell-file-name "/bin/zsh")
 (setq shell-command-switch "-c")
 
 ;; (M-! and M-| and compile.el)
-(setq shell-file-name "bash.exe")
+(setq shell-file-name "/bin/zsh")
 (modify-coding-system-alist 'process ".*sh\\.exe" 'utf-8)
 
 
@@ -607,13 +607,6 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ magit                          追加コンテンツ                 ;;;
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-
-(require 'magit)
-
-
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; ★ 俺キーバインド     key-bind  keybind                         ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
@@ -621,7 +614,6 @@
 (global-set-key (kbd "s-r")   'query-replace)
 (global-set-key (kbd "s-o")   'recentf-open-files)
 (global-set-key (kbd "s-;")   'comment-dwim)
-(global-set-key (kbd "s-g")   'magit-status)
 (global-set-key (kbd "s-w")   'kill-buffer)
 (global-set-key (kbd "s-f")   'find-file)
 (global-set-key (kbd "s-s")   'save-buffer)
@@ -710,24 +702,6 @@
 (global-set-key (kbd "C-M-i") 'increase-left-margin)
 (global-set-key (kbd "C-S-i") 'decrease-left-margin)
 
-;; Magit 関連
-(global-set-key (kbd "M-g M-s") 'magit-status)
-(global-set-key (kbd "M-g s")   'magit-status) ;; たいてい status で片付く
-(global-set-key (kbd "M-g i n") 'magit-init)
-(global-set-key (kbd "M-g a d") 'magit-stage) ;; たぶん add と同じ
-(global-set-key (kbd "M-g f t") 'magit-fetch)
-(global-unset-key  (kbd "M-g p") )  ;; previous-error のキーバインドを解除
-(global-set-key (kbd "M-g p l") 'magit-pull)
-(global-set-key (kbd "M-g p s") 'magit-push)
-(global-set-key (kbd "M-g d f") 'magit-diff)
-(global-set-key (kbd "M-g r s") 'magit-reset)
-(global-set-key (kbd "M-g r b") 'magit-rebase)
-(global-set-key (kbd "M-g l o") 'magit-log)
-(global-set-key (kbd "M-g b r") 'magit-branch-manager)
-(global-unset-key  (kbd "M-g c") )  ;; goto char らしいけど、searchあるからいいっしょ
-(global-set-key (kbd "M-g c o") 'magit-checkout)
-(global-set-key (kbd "M-g c c") 'magit-commit)
-
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ auto-complete                追加コンテンツ                   ;;;
@@ -795,7 +769,7 @@
 
 ;; js2-mode
 (require 'js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'"          . js2-mode))
+(add-to-list 'auto-mode-alist '("\\(.js\\|.es6\\)\\'"          . js2-mode))
 
 ;; json-mode
 (require 'json-mode)
@@ -860,12 +834,9 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 ;; emacs-server起動
-;; (require 'server)
-;; (defun server-ensure-safe-dir (dir) "Noop" t)
-;; (setq server-socket-dir "~/.emacs.d")
-(unless (server-running-p)
-  (server-start)
-  )
+(require 'server)
+(defun server-ensure-safe-dir (dir) "Noop" t)
+(setq server-socket-dir "~/.emacs.d")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
