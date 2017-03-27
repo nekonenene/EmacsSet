@@ -627,10 +627,7 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
 
@@ -902,7 +899,22 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
- )
+ '(package-selected-packages
+   (quote
+    (visual-regexp-steroids visual-regexp web-mode recentf-ext rainbow-mode lua-mode gitignore-mode gitconfig-mode auto-indent-mode ac-python ac-php ac-js2 ac-html)))
+ '(tabbar-mode t nil (tabbar)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(web-mode-css-at-rule-face ((t (:foreground "#FF7F00"))))
+ '(web-mode-css-pseudo-class-face ((t (:foreground "#FF7F00"))))
+ '(web-mode-css-rule-face ((t (:foreground "#A0D8EF"))))
+ '(web-mode-doctype-face ((t (:foreground "#bbff22"))))
+ '(web-mode-html-attr-name-face ((t (:foreground "#ed7dd7"))))
+ '(web-mode-html-attr-value-face ((t (:foreground "light salmon"))))
+ '(web-mode-html-tag-face ((t (:foreground "light sea green" :weight bold)))))
 ;; Local Variables:
 ;; coding: utf-8
 ;; mode: emacs-lisp
