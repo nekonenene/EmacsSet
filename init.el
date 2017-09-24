@@ -24,9 +24,12 @@
 ;;; @ site-lisp                                                     ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-(let ( (default-directory
-         (file-name-as-directory (concat user-emacs-directory "elpa")))
-       )
+(let
+  (
+    (default-directory
+      (file-name-as-directory (concat user-emacs-directory "elpa"))
+    )
+  )
   (add-to-list 'load-path default-directory)
   ;; (add-to-list 'load-path "~/.emacs.d/elpa/")
   (normal-top-level-add-subdirs-to-load-path)
@@ -105,26 +108,28 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (setq default-frame-alist
-      (append '(
-                ;; (width                . 77 ) ; フレーム幅
-                ;; (height               . 44 ) ; フレーム高
-                ;; (left                 . 81 ) ; 配置左位置
-                ;; (top                  .  2 ) ; 配置上位置
-                (line-spacing         . 0  ) ; 文字間隔
-                (left-fringe          . 10 ) ; 左フリンジ幅
-                (right-fringe         . 11 ) ; 右フリンジ幅
-                (menu-bar-lines       . 1  ) ; メニューバー
-                (tool-bar-lines       . 1  ) ; ツールバー
-                (vertical-scroll-bars . 1  ) ; スクロールバー
-                (scroll-bar-width     . 14 ) ; スクロールバー幅
-                (cursor-type          . box) ; カーソル種別
-                (alpha                . 94) ; 透明度
-                ) default-frame-alist) )
+  (append '(
+    ;; (width                . 77 ) ; フレーム幅
+    ;; (height               . 44 ) ; フレーム高
+    ;; (left                 . 81 ) ; 配置左位置
+    ;; (top                  .  2 ) ; 配置上位置
+    (line-spacing         . 0  ) ; 文字間隔
+    (left-fringe          . 10 ) ; 左フリンジ幅
+    (right-fringe         . 11 ) ; 右フリンジ幅
+    (menu-bar-lines       . 1  ) ; メニューバー
+    (tool-bar-lines       . 1  ) ; ツールバー
+    (vertical-scroll-bars . 1  ) ; スクロールバー
+    (scroll-bar-width     . 14 ) ; スクロールバー幅
+    (cursor-type          . box) ; カーソル種別
+    (alpha                . 94) ; 透明度
+  ) default-frame-alist)
+)
 (setq initial-frame-alist default-frame-alist)
 
 ;; フレーム タイトル
 (setq frame-title-format
-      '("emacs " emacs-version (buffer-file-name " - %f")))
+  '("emacs " emacs-version (buffer-file-name " - %f"))
+)
 
 ;; 初期画面の非表示
 (setq inhibit-startup-message nil)
@@ -139,7 +144,7 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ screen - 前回の表示サイズを記憶                               ;;;
+;;; @ screen - 前回の表示サイズを記憶                                   ;;;
 ;;; http://www.bookshelf.jp/soft/meadow_30.html#SEC419              ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
@@ -312,7 +317,8 @@
 
 ;; C-gで検索を終了
 (define-key isearch-mode-map (kbd "C-g")
-  '(lambda() (interactive) (isearch-done)))
+  '(lambda() (interactive) (isearch-done))
+)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -336,8 +342,10 @@
 
 ;; ファイルオープン時のバックアップ（~）の格納ディレクトリ
 (setq backup-directory-alist
-      (cons (cons "\\.*$" (expand-file-name "/tmp/emacsbk"))
-            backup-directory-alist))
+  (cons
+    (cons "\\.*$" (expand-file-name "/tmp/emacsbk"))
+  backup-directory-alist)
+)
 
 ;; 編集中ファイルの自動バックアップ
 (setq backup-inhibited nil)
@@ -357,7 +365,8 @@
 
 ;; 編集中ファイル（##）の格納ディレクトリ
 (setq auto-save-file-name-transforms
-      `((".*" ,(expand-file-name "/tmp/emacsbk") t)))
+  `((".*" ,(expand-file-name "/tmp/emacsbk") t))
+)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -409,13 +418,12 @@
 
 ;; マウスの右クリックの割り当て(押しながらの操作)をはずす
 (if window-system (progn
-                    (global-unset-key [down-mouse-3])
-                    ;; マウスの右クリックメニューを使えるようにする
-                    (defun bingalls-edit-menu (event)  (interactive "e")
-                           (popup-menu menu-bar-edit-menu))
-                    (global-set-key [mouse-3] 'bingalls-edit-menu)
-                    )
-  )
+  (global-unset-key [down-mouse-3])
+  ;; マウスの右クリックメニューを使えるようにする
+  (defun bingalls-edit-menu (event)  (interactive "e")
+    (popup-menu menu-bar-edit-menu))
+  (global-set-key [mouse-3] 'bingalls-edit-menu)
+))
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -451,11 +459,14 @@
 (call-interactively 'tabbar-mode t)
 
 ;; ボタン非表示
-(dolist (btn '(tabbar-buffer-home-button
-               tabbar-scroll-left-button
-               tabbar-scroll-right-button))
+(dolist
+  (btn '(
+    tabbar-buffer-home-button
+    tabbar-scroll-left-button
+    tabbar-scroll-right-button
+  ))
   (set btn (cons (cons "" nil) (cons "" nil)))
-  )
+)
 
 ;; タブ切替にマウスホイールを使用（0：有効，-1：無効）
 ;; (call-interactively 'tabbar-mwheel-mode -1)
@@ -482,23 +493,23 @@
 (set-face-background 'whitespace-space nil)
 (set-face-bold-p 'whitespace-space t)
 ;; Tabの色		theme.el - whitespace-tab 内でも指定されている
-                                        ;(set-face-foreground 'whitespace-tab "DarkOliveGreen1")
-                                        ;(set-face-background 'whitespace-tab nil)
-                                        ;(set-face-underline  'whitespace-tab t)
+;(set-face-foreground 'whitespace-tab "DarkOliveGreen1")
+;(set-face-background 'whitespace-tab nil)
+;(set-face-underline  'whitespace-tab t)
 
 ;; 全角スペースとTabのみ強調（デフォだと半角スペースや改行を強調したりする）
 (setq whitespace-style '(face tabs tab-mark spaces space-mark))
 (setq whitespace-space-regexp "\\(\x3000+\\)")
-(setq whitespace-display-mappings
-      '((space-mark ?\x3000 [?\□])
-        (tab-mark   ?\t   [?\xBB ?\t])
-        ))
+(setq whitespace-display-mappings '(
+  (space-mark ?\x3000 [?\□])
+  (tab-mark   ?\t   [?\xBB ?\t])
+))
 
 (global-whitespace-mode 1) ; 全角スペースを常に表示
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ saveplace - カーソル位置を記憶                                   ;;;
+;;; @ saveplace - カーソル位置を記憶                                ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (require 'saveplace)
@@ -506,7 +517,7 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ daddrev-ex                              追加コンテンツ          ;;;
+;;; @ daddrev-ex                              追加コンテンツ        ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 ;; daddrev : M - / で実行。バッファ内の単語を補完
@@ -517,14 +528,14 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; addrev の設定   ;;;;
+;;;; addrev の設定  ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ; (setq addrev-file-name "~/.emacs.d/abbrev_defs") ;; ここ以外指定できないっぽい
 (setq save-abbrevs t)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ recentf-ext - 最近開いたファイルを表示       追加コンテンツ         ;;;
+;;; @ recentf-ext - 最近開いたファイルを表示       追加コンテンツ   ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (require 'recentf-ext)
@@ -532,7 +543,7 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ rainbow-mode - #ffffff 等を色づけ            追加コンテンツ       ;;;
+;;; @ rainbow-mode - #ffffff 等を色づけ            追加コンテンツ   ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (require 'rainbow-mode)
@@ -547,10 +558,8 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
 
@@ -558,13 +567,7 @@
 ;;; @ visual-regexp-steroids              追加コンテンツ            ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; (defvar emacs-root
-;;   (eval-when-compile
-;;     '(
 (require 'visual-regexp-steroids)
-;;      )))
-;; 上記のように書かないと `regexp-string' 由来のコンパイル警告を吐く
-;; しかし上記のように defvar を書くと、pcre2el モードで動いてしまうことがわかったのでコメントアウトした
 
 (setq vr/engine 'python) ; 'python, 'pcre2el, or 'emacs
 ;; python が インストールされてない環境では、上１行をコメントアウト、下２行をコメント解除
@@ -572,7 +575,8 @@
 ;; (require 'pcre2el)
 
 ;; multiple-cursors ( https://github.com/magnars/multiple-cursors.el ) を使っている場合は下１行をコメント解除
-                                        ; (global-set-key (kbd "C-c m") 'vr/mc-mark)
+; (global-set-key (kbd "C-c m") 'vr/mc-mark)
+
 ;; 普段の 'query-replace-regexp を visual-regexp に
 (global-set-key (kbd "C-x C-r") 'vr/query-replace)
 (global-set-key (kbd "C-S-x C-S-r") 'vr/replace)
@@ -701,30 +705,25 @@
 
 ;; デフォルトの補完内容
 (setq-default ac-sources '(
-                           ac-source-words-in-buffer ;; 現在のバッファの内容
-                           ac-source-abbrev
-                           ac-source-words-in-same-mode-buffers
-                           ))
+  ac-source-words-in-buffer ;; 現在のバッファの内容
+  ac-source-abbrev
+  ac-source-words-in-same-mode-buffers
+))
 
-;;;; ac-user-dict のインポート                   ;;;;
-;;;; http://fukuyama.co/emacs-auto-complete      ;;;;
+;;;; ac-user-dict のインポート              ;;;;
+;;;; http://fukuyama.co/emacs-auto-complete ;;;;
 
 (require 'ac-user-dict-import)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;  modeの設定  ;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;:;;;;;;
+;;;;;;;;;;;;;;;;;;;;:;;;;;;;
 ;; 拡張子の末尾は "$" or "\\"  \\ がベター
 ;; 参考 : http://syohex.hatenablog.com/entry/20140910/1410356727
 
-;; emacs-lisp
-(add-to-list 'auto-mode-alist '(".el\\'"      . emacs-lisp-mode))
-
 ;; .h は c-mode でなく c++-mode で
 (add-to-list 'auto-mode-alist '("\\.h\\'"   . c++-mode))
-
-;;;;;;; ^^^ 以上はデフォルトで存在する mode なので require は不要 ^^^ ;;;;;;;
 
 ;; web-mode
 (require 'web-mode)
@@ -743,44 +742,20 @@
 
 ;; js2-mode
 (require 'js2-mode)
-(add-to-list 'auto-mode-alist '("\\(.js\\|.es6\\)\\'"          . js2-mode))
-
-;; json-mode
-(require 'json-mode)
-(add-to-list 'auto-mode-alist '("\\.json\\'"        . json-mode))
-
-;; csv-mode
-(require 'csv-mode)
-(add-to-list 'auto-mode-alist '("\\.csv\\'"         . csv-mode))
-
-;; gitignore
-(require 'gitignore-mode)
-(add-to-list 'auto-mode-alist '("\\.gitignore\\'"   . gitignore-mode))
-
-;; gitconfig
-(require 'gitconfig-mode)
-(add-to-list 'auto-mode-alist '("\\.gitconfig\\'"   . gitconfig-mode))
-
+(add-to-list 'auto-mode-alist '("\\(.js\\|.es6\\)\\'" . js2-mode))
 
 ;; Windows Power Shell mode
 (require 'powershell)
 (add-hook 'powershell-mode-hook '(lambda()
-                                   (auto-complete-mode t)
-                                   ))
+  (auto-complete-mode t)
+))
 
 ;; lua
-(require 'lua-mode)
-(add-to-list 'auto-mode-alist '("\\.lua\\'"        . lua-mode))
-(add-to-list 'auto-mode-alist '("\\(.anm\\|.scn\\|.tra\\|.cam\\|.obj\\)\\'"      . lua-mode))
+(add-to-list 'auto-mode-alist '("\\(.anm\\|.scn\\|.tra\\|.cam\\|.obj\\)\\'" . lua-mode))
 
 ;; sh - bash, zsh
 ;; (require 'sh-mode)
-(add-to-list 'auto-mode-alist '("\\(.?(bash|zsh)rc\\|.zprofile\\)\\'"      . sh-mode))
-
-;; objective-c
-(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@implementation" . objc-mode))
-(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@interface" . objc-mode))
-(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@protocol" . objc-mode))
+(add-to-list 'auto-mode-alist '("\\(.?(bash|zsh)rc\\|.zprofile\\)\\'" . sh-mode))
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -789,8 +764,8 @@
 
 ;; テーマ格納ディレクトリのパス追加
 (add-to-list 'custom-theme-load-path
-             (file-name-as-directory (concat user-emacs-directory "theme"))
-             )
+  (file-name-as-directory (concat user-emacs-directory "theme"))
+)
 
 ;; テーマ選択
 ;; (load-theme 'solarized-light t)
@@ -810,27 +785,31 @@
 (setq server-socket-dir "~/.emacs.d")
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ediff-window-setup-function (quote ediff-setup-windows-plain))
- '(package-selected-packages
-   (quote
-	(editorconfig flycheck lua-mode pcre2el csv-mode gitconfig-mode gitignore-mode hiwin json-mode ac-html ac-html-csswatcher ac-js2 tabbar rainbow-mode recentf-ext popup popup-complete powershell web-completion-data web-mode visual-regexp visual-regexp-steroids)))
- '(tabbar-mode t nil (tabbar)))
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+  '(package-selected-packages
+    (quote
+      (kotlin-mode editorconfig flycheck lua-mode pcre2el csv-mode gitconfig-mode gitignore-mode hiwin json-mode ac-html ac-html-csswatcher ac-js2 tabbar rainbow-mode recentf-ext popup popup-complete powershell web-completion-data web-mode visual-regexp visual-regexp-steroids)
+    )
+  )
+  '(tabbar-mode t nil (tabbar))
+)
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(web-mode-css-at-rule-face ((t (:foreground "#FF7F00"))))
- '(web-mode-css-pseudo-class-face ((t (:foreground "#FF7F00"))))
- '(web-mode-css-rule-face ((t (:foreground "#A0D8EF"))))
- '(web-mode-doctype-face ((t (:foreground "#bbff22"))))
- '(web-mode-html-attr-name-face ((t (:foreground "#ed7dd7"))))
- '(web-mode-html-attr-value-face ((t (:foreground "light salmon"))))
- '(web-mode-html-tag-face ((t (:foreground "light sea green" :weight bold)))))
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+  '(web-mode-css-at-rule-face ((t (:foreground "#FF7F00"))))
+  '(web-mode-css-pseudo-class-face ((t (:foreground "#FF7F00"))))
+  '(web-mode-css-rule-face ((t (:foreground "#A0D8EF"))))
+  '(web-mode-doctype-face ((t (:foreground "#bbff22"))))
+  '(web-mode-html-attr-name-face ((t (:foreground "#ed7dd7"))))
+  '(web-mode-html-attr-value-face ((t (:foreground "light salmon"))))
+  '(web-mode-html-tag-face ((t (:foreground "light sea green" :weight bold))))
+)
 ;; Local Variables:
 ;; coding: utf-8
 ;; mode: emacs-lisp
