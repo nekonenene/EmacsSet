@@ -25,12 +25,12 @@
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (let ( (default-directory
-         (file-name-as-directory (concat user-emacs-directory "site-lisp")))
+         (file-name-as-directory (concat user-emacs-directory "elpa")))
        )
   (add-to-list 'load-path default-directory)
-  ;;  (add-to-list 'load-path "~/.emacs.d/elpa/")
+  ;; (add-to-list 'load-path "~/.emacs.d/elpa/")
   (normal-top-level-add-subdirs-to-load-path)
-  )
+)
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ language - coding system                                      ;;;
@@ -437,7 +437,7 @@
 
 ;; flymake より 導入が手軽な flycheck を使う
 ;; 注意： jshint はインストールが必要。だが、Cygwin版 Emacsでは PATH の関係で動かない
-; (require 'flycheck)
+(require 'flycheck)
 ; (add-hook 'after-init-hook #'global-flycheck-mode)
 
 
@@ -498,16 +498,15 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ saveplace - カーソル位置を記憶          追加コンテンツ        ;;;
+;;; @ saveplace - カーソル位置を記憶                                   ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-(when (require 'saveplace nil t)
-  (setq-default save-place t)
-  (setq save-place-file "~/.emacs.d/saved-places"))
+(require 'saveplace)
+(save-place-mode 1)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ daddrev-ex                              追加コンテンツ        ;;;
+;;; @ daddrev-ex                              追加コンテンツ          ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 ;; daddrev : M - / で実行。バッファ内の単語を補完
@@ -518,14 +517,14 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; addrev の設定  ;;;;
+;;;; addrev の設定   ;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ; (setq addrev-file-name "~/.emacs.d/abbrev_defs") ;; ここ以外指定できないっぽい
 (setq save-abbrevs t)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ recentf-ext - 最近開いたファイルを表示       追加コンテンツ   ;;;
+;;; @ recentf-ext - 最近開いたファイルを表示       追加コンテンツ         ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (require 'recentf-ext)
@@ -533,7 +532,7 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ rainbow-mode - #ffffff 等を色づけ            追加コンテンツ   ;;;
+;;; @ rainbow-mode - #ffffff 等を色づけ            追加コンテンツ       ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (require 'rainbow-mode)
@@ -544,7 +543,7 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ package manager              追加コンテンツ                   ;;;
+;;; @ package manager                 追加コンテンツ                   ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
 (require 'package)
@@ -764,9 +763,7 @@
 
 
 ;; Windows Power Shell mode
-(require 'powershell-mode)
-(autoload 'powershell-mode "powershell-mode" "A editing mode for Microsoft PowerShell." t)
-(add-to-list 'auto-mode-alist '("\\.ps1\\'" . powershell-mode))
+(require 'powershell)
 (add-hook 'powershell-mode-hook '(lambda()
                                    (auto-complete-mode t)
                                    ))
@@ -778,8 +775,7 @@
 
 ;; sh - bash, zsh
 ;; (require 'sh-mode)
-(add-to-list 'auto-mode-alist '("\\.bashrc\\'"        . sh-mode))
-(add-to-list 'auto-mode-alist '("\\(.?zshrc\\|.zprofile\\)\\'"      . sh-mode))
+(add-to-list 'auto-mode-alist '("\\(.?(bash|zsh)rc\\|.zprofile\\)\\'"      . sh-mode))
 
 ;; objective-c
 (add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@implementation" . objc-mode))
@@ -819,7 +815,22 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
- )
+ '(package-selected-packages
+   (quote
+	(editorconfig flycheck lua-mode pcre2el csv-mode gitconfig-mode gitignore-mode hiwin json-mode ac-html ac-html-csswatcher ac-js2 tabbar rainbow-mode recentf-ext popup popup-complete powershell web-completion-data web-mode visual-regexp visual-regexp-steroids)))
+ '(tabbar-mode t nil (tabbar)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(web-mode-css-at-rule-face ((t (:foreground "#FF7F00"))))
+ '(web-mode-css-pseudo-class-face ((t (:foreground "#FF7F00"))))
+ '(web-mode-css-rule-face ((t (:foreground "#A0D8EF"))))
+ '(web-mode-doctype-face ((t (:foreground "#bbff22"))))
+ '(web-mode-html-attr-name-face ((t (:foreground "#ed7dd7"))))
+ '(web-mode-html-attr-value-face ((t (:foreground "light salmon"))))
+ '(web-mode-html-tag-face ((t (:foreground "light sea green" :weight bold)))))
 ;; Local Variables:
 ;; coding: utf-8
 ;; mode: emacs-lisp
