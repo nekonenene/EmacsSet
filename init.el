@@ -5,13 +5,14 @@
 ;;; @ site-lisp                                                     ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-(let ( (default-directory
-         (file-name-as-directory (concat user-emacs-directory "site-lisp")))
-       )
+(let
+  ((default-directory
+    (file-name-as-directory (concat user-emacs-directory "site-lisp"))
+  ))
   (add-to-list 'load-path default-directory)
-  ;;  (add-to-list 'load-path "~/.emacs.d/elpa/")
+  ;; (add-to-list 'load-path "~/.emacs.d/elpa/")
   (normal-top-level-add-subdirs-to-load-path)
-  )
+)
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ language - coding system                                      ;;;
@@ -268,11 +269,12 @@
 (defvar linum-line-number 0)
 (declare-function linum-update-current "linum" ())
 (defadvice linum-update-current
-    (around linum-update-current-around activate compile)
+  (around linum-update-current-around activate compile)
   (unless (= linum-line-number (line-number-at-pos))
     (setq linum-line-number (line-number-at-pos))
     ad-do-it
-    ))
+  )
+)
 
 ;; バッファ中の行番号表示の遅延設定
 (defvar linum-delay nil)
@@ -389,8 +391,11 @@
 
 ;; ファイルオープン時のバックアップ（~）の格納ディレクトリ
 (setq backup-directory-alist
-      (cons (cons "\\.*$" (expand-file-name "/tmp/emacsbk"))
-            backup-directory-alist))
+  (cons
+    (cons "\\.*$" (expand-file-name "/tmp/emacsbk"))
+    backup-directory-alist
+  )
+)
 
 ;; 編集中ファイルの自動バックアップ
 (setq backup-inhibited nil)
@@ -410,7 +415,8 @@
 
 ;; 編集中ファイル（##）の格納ディレクトリ
 (setq auto-save-file-name-transforms
-      `((".*" ,(expand-file-name "/tmp/emacsbk") t)))
+  `((".*" ,(expand-file-name "/tmp/emacsbk") t))
+)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -487,13 +493,14 @@
 
 ;; マウスの右クリックの割り当て(押しながらの操作)をはずす
 (if window-system (progn
-                    (global-unset-key [down-mouse-3])
-                    ;; マウスの右クリックメニューを使えるようにする
-                    (defun bingalls-edit-menu (event)  (interactive "e")
-                           (popup-menu menu-bar-edit-menu))
-                    (global-set-key [mouse-3] 'bingalls-edit-menu)
-                    )
+  (global-unset-key [down-mouse-3])
+  ;; マウスの右クリックメニューを使えるようにする
+  (defun bingalls-edit-menu (event)
+    (interactive "e")
+    (popup-menu menu-bar-edit-menu)
   )
+  (global-set-key [mouse-3] 'bingalls-edit-menu)
+))
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -511,16 +518,6 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ flycheck                         追加コンテンツ               ;;;
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-
-;; flymake より 導入が手軽な flycheck を使う
-;; 注意： jshint はインストールが必要。だが、Cygwin版 Emacsでは PATH の関係で動かない
-;; (require 'flycheck)
-;; (add-hook 'after-init-hook #'global-flycheck-mode)
-
-
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ whitespace - 全角スペース、Tabを表示        追加コンテンツ    ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
@@ -531,17 +528,19 @@
 (set-face-background 'whitespace-space nil)
 (set-face-bold-p 'whitespace-space t)
 ;; Tabの色		theme.el - whitespace-tab 内でも指定されている
-                                        ;(set-face-foreground 'whitespace-tab "DarkOliveGreen1")
-                                        ;(set-face-background 'whitespace-tab nil)
-                                        ;(set-face-underline  'whitespace-tab t)
+;(set-face-foreground 'whitespace-tab "DarkOliveGreen1")
+;(set-face-background 'whitespace-tab nil)
+;(set-face-underline  'whitespace-tab t)
 
 ;; 全角スペースとTabのみ強調（デフォだと半角スペースや改行を強調したりする）
 (setq whitespace-style '(face tabs tab-mark spaces space-mark))
 (setq whitespace-space-regexp "\\(\x3000+\\)")
 (setq whitespace-display-mappings
-      '((space-mark ?\x3000 [?\□])
-        (tab-mark   ?\t   [?\xBB ?\t])
-        ))
+  '(
+    (space-mark ?\x3000 [?\□])
+    (tab-mark   ?\t   [?\xBB ?\t])
+  )
+)
 
 (global-whitespace-mode 1) ; 全角スペースを常に表示
 
@@ -552,7 +551,8 @@
 
 (when (require 'saveplace nil t)
   (setq-default save-place t)
-  (setq save-place-file "~/.emacs.d/saved-places"))
+  (setq save-place-file "~/.emacs.d/saved-places")
+)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -582,7 +582,7 @@
 ;; (require 'pcre2el)
 
 ;; multiple-cursors ( https://github.com/magnars/multiple-cursors.el ) を使っている場合は下１行をコメント解除
-                                        ; (global-set-key (kbd "C-c m") 'vr/mc-mark)
+; (global-set-key (kbd "C-c m") 'vr/mc-mark)
 ;; 普段の 'query-replace-regexp を visual-regexp に
 (global-set-key (kbd "C-x C-r") 'vr/query-replace)
 (global-set-key (kbd "C-S-x C-S-r") 'vr/replace)
@@ -673,8 +673,8 @@
 
 ;; テーマ格納ディレクトリのパス追加
 (add-to-list 'custom-theme-load-path
-             (file-name-as-directory (concat user-emacs-directory "theme"))
-             )
+  (file-name-as-directory (concat user-emacs-directory "theme"))
+)
 
 ;; テーマ選択
 ;; (load-theme 'solarized-light t)
@@ -694,7 +694,7 @@
 (setq server-socket-dir "~/.emacs.d")
 (unless (server-running-p)
   (server-start)
-  )
+)
 
 
 (custom-set-variables
