@@ -521,36 +521,6 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ screen - tabbar                                               ;;;
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-
-(require 'tabbar)
-
-;; tabbar有効化
-(call-interactively 'tabbar-mode t)
-
-;; ボタン非表示
-(dolist (btn '(tabbar-buffer-home-button
-               tabbar-scroll-left-button
-               tabbar-scroll-right-button))
-  (set btn (cons (cons "" nil) (cons "" nil)))
-  )
-
-;; タブ切替にマウスホイールを使用（0：有効，-1：無効）
-(call-interactively 'tabbar-mwheel-mode -1)
-(remove-hook 'tabbar-mode-hook      'tabbar-mwheel-follow)
-(remove-hook 'mouse-wheel-mode-hook 'tabbar-mwheel-follow)
-
-;; タブグループを使用（t：有効，nil：無効）
-(defvar tabbar-buffer-groups-function nil)
-(setq tabbar-buffer-groups-function nil)
-
-;; タブの表示間隔
-(defvar tabbar-separator nil)
-(setq tabbar-separator '(1.0))
-
-
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ whitespace - 全角スペース、Tabを表示        追加コンテンツ    ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
@@ -586,43 +556,6 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ daddrev-ex                              追加コンテンツ        ;;;
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-
-;; daddrev : M - / で実行。バッファ内の単語を補完
-;; auto-complete の簡易版みたいな、Emacs標準機能
-
-(load "dabbrev-ja")  ; 日本語の補完を拾いすぎないように改善
-(require 'dabbrev-highlight)  ; どこから補完してきたのか、単語をハイライト
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; addrev の設定  ;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;(setq addrev-file-name "~/.emacs.d/abbrev_defs") ;; ここ以外指定できないっぽい
-                                        ;(setq save-abbrevs t)
-
-
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ recentf-ext - 最近開いたファイルを表示       追加コンテンツ   ;;;
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-
-(require 'recentf-ext)
-(setq recentf-max-saved-items 100) ; 100個まで履歴として保存
-
-
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ rainbow-mode - #ffffff 等を色づけ            追加コンテンツ   ;;;
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-
-(require 'rainbow-mode)
-
-(add-hook 'text-mode-hook 'rainbow-mode)
-(add-hook 'emacs-lisp-mode-hook 'rainbow-mode)
-(add-hook 'js2-mode-hook 'rainbow-mode)
-
-
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ package manager              追加コンテンツ                   ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
@@ -635,11 +568,11 @@
 ;;; @ visual-regexp-steroids              追加コンテンツ            ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-;; (defvar emacs-root
-;;   (eval-when-compile
-;;     '(
-(require 'visual-regexp-steroids)
-;;      )))
+(defvar emacs-root
+  (eval-when-compile
+    '((require 'visual-regexp-steroids))
+  )
+)
 ;; 上記のように書かないと `regexp-string' 由来のコンパイル警告を吐く
 ;; しかし上記のように defvar を書くと、pcre2el モードで動いてしまうことがわかったのでコメントアウトした
 
@@ -658,13 +591,6 @@
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ magit                          追加コンテンツ                 ;;;
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-
-(require 'magit)
-
-
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; ★ 俺キーバインド     key-bind  keybind                         ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
@@ -673,14 +599,6 @@
 
 ;; コンパイルをF12で
 (global-set-key [f12] 'compile)
-
-;; タブ切り替え @tabber
-(global-set-key (kbd "<C-tab>")   'tabbar-forward-tab)
-(global-set-key [f6]              'tabbar-forward-tab)
-;; 前のタブへ
-(global-set-key (kbd "C-q")       'tabbar-backward-tab)
-(global-set-key (kbd "<C-S-tab>") 'tabbar-backward-tab)
-(global-set-key [f7]              'tabbar-backward-tab)
 
 ;; バッファを閉じる Close Buffer
 (global-set-key (kbd "C-c b") 'kill-buffer)
@@ -754,41 +672,6 @@
 (global-set-key (kbd "M-g c c") 'magit-commit)
 
 
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-;;; @ auto-complete                追加コンテンツ                   ;;;
-;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
-
-(require 'auto-complete)
-(require 'auto-complete-config)
-;(ac-config-default)
-(global-auto-complete-mode t)
-
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/site-lisp/auto-complete/dict")
-
-;; 0秒後に自動で表示
-(setq ac-delay 0.05)
-(setq ac-auto-show-menu 0.05)
-;; クイックヘルプ表示
-(setq ac-quick-help-delay 0.1)
-
-;; 1文字目を入力したら補完開始
-(setq ac-auto-start 1)
-
-;; default color は theme 内に記述されている
-
-;; デフォルトの補完内容
-(setq-default ac-sources '(
-                           ac-source-words-in-buffer ;; 現在のバッファの内容
-                           ac-source-abbrev
-                           ac-source-words-in-same-mode-buffers
-                           ))
-
-;;;; ac-user-dict のインポート                   ;;;;
-;;;; http://fukuyama.co/emacs-auto-complete      ;;;;
-
-(require 'ac-user-dict-import)
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;  modeの設定  ;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;:;;;;;;
@@ -800,67 +683,6 @@
 
 ;; .h は c-mode でなく c++-mode で
 (add-to-list 'auto-mode-alist '("\\.h\\'"   . c++-mode))
-
-;;;;;;; ^^^ 以上はデフォルトで存在する mode なので require は不要 ^^^ ;;;;;;;
-
-;; web-mode
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.phtml\\'"      . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'"  . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[gj]sp\\'"     . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'"    . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'"        . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'"   . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'"     . web-mode))
-
-(add-to-list 'auto-mode-alist '("\\(.html?\\|.css\\|.php\\)\\'"
-                                . web-mode))
-
-(require 'web-mode-my-setting)
-
-;; js2-mode
-(require 'js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'"          . js2-mode))
-
-;; json-mode
-(require 'json-mode)
-(add-to-list 'auto-mode-alist '("\\.json\\'"        . json-mode))
-
-;; csv-mode
-(require 'csv-mode)
-(add-to-list 'auto-mode-alist '("\\.csv\\'"         . csv-mode))
-
-;; gitignore
-(require 'gitignore-mode)
-(add-to-list 'auto-mode-alist '("\\.gitignore\\'"   . gitignore-mode))
-
-;; gitconfig
-(require 'gitconfig-mode)
-(add-to-list 'auto-mode-alist '("\\.gitconfig\\'"   . gitconfig-mode))
-
-
-;; Windows Power Shell mode
-(require 'powershell-mode)
-(autoload 'powershell-mode "powershell-mode" "A editing mode for Microsoft PowerShell." t)
-(add-to-list 'auto-mode-alist '("\\.ps1\\'" . powershell-mode))
-(add-hook 'powershell-mode-hook '(lambda()
-                                   (auto-complete-mode t)
-                                   ))
-
-;; lua
-(require 'lua-mode)
-(add-to-list 'auto-mode-alist '("\\.lua\\'"        . lua-mode))
-(add-to-list 'auto-mode-alist '("\\(.anm\\|.scn\\|.tra\\|.cam\\|.obj\\)\\'"      . lua-mode))
-
-;; sh - bash, zsh
-;; (require 'sh-mode)
-(add-to-list 'auto-mode-alist '("\\.bashrc\\'"        . sh-mode))
-(add-to-list 'auto-mode-alist '("\\(.?zshrc\\|.zprofile\\)\\'"      . sh-mode))
-
-;; objective-c
-(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@implementation" . objc-mode))
-(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@interface" . objc-mode))
-(add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@protocol" . objc-mode))
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -898,23 +720,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ediff-window-setup-function (quote ediff-setup-windows-plain))
- '(package-selected-packages
-   (quote
-    (visual-regexp-steroids visual-regexp web-mode recentf-ext rainbow-mode lua-mode gitignore-mode gitconfig-mode auto-indent-mode ac-python ac-php ac-js2 ac-html)))
- '(tabbar-mode t nil (tabbar)))
+)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(web-mode-css-at-rule-face ((t (:foreground "#FF7F00"))))
- '(web-mode-css-pseudo-class-face ((t (:foreground "#FF7F00"))))
- '(web-mode-css-rule-face ((t (:foreground "#A0D8EF"))))
- '(web-mode-doctype-face ((t (:foreground "#bbff22"))))
- '(web-mode-html-attr-name-face ((t (:foreground "#ed7dd7"))))
- '(web-mode-html-attr-value-face ((t (:foreground "light salmon"))))
- '(web-mode-html-tag-face ((t (:foreground "light sea green" :weight bold)))))
+)
 ;; Local Variables:
 ;; coding: utf-8
 ;; mode: emacs-lisp
