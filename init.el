@@ -568,11 +568,11 @@
 ;;; @ visual-regexp-steroids              追加コンテンツ            ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
-(defvar emacs-root
-  (eval-when-compile
-    '((require 'visual-regexp-steroids))
-  )
-)
+;; (defvar emacs-root
+;;   (eval-when-compile
+;;     '((require 'visual-regexp-steroids))
+;;   )
+;; )
 ;; 上記のように書かないと `regexp-string' 由来のコンパイル警告を吐く
 ;; しかし上記のように defvar を書くと、pcre2el モードで動いてしまうことがわかったのでコメントアウトした
 
@@ -653,24 +653,6 @@
 (global-set-key (kbd "C-M-i") 'increase-left-margin)
 (global-set-key (kbd "C-S-i") 'decrease-left-margin)
 
-;; Magit 関連
-(global-set-key (kbd "M-g M-s") 'magit-status)
-(global-set-key (kbd "M-g s")   'magit-status) ;; たいてい status で片付く
-(global-set-key (kbd "M-g i n") 'magit-init)
-(global-set-key (kbd "M-g a d") 'magit-stage) ;; たぶん add と同じ
-(global-set-key (kbd "M-g f t") 'magit-fetch)
-(global-unset-key  (kbd "M-g p") )  ;; previous-error のキーバインドを解除
-(global-set-key (kbd "M-g p l") 'magit-pull)
-(global-set-key (kbd "M-g p s") 'magit-push)
-(global-set-key (kbd "M-g d f") 'magit-diff)
-(global-set-key (kbd "M-g r s") 'magit-reset)
-(global-set-key (kbd "M-g r b") 'magit-rebase)
-(global-set-key (kbd "M-g l o") 'magit-log)
-(global-set-key (kbd "M-g b r") 'magit-branch-manager)
-(global-unset-key  (kbd "M-g c") )  ;; goto char らしいけど、searchあるからいいっしょ
-(global-set-key (kbd "M-g c o") 'magit-checkout)
-(global-set-key (kbd "M-g c c") 'magit-commit)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;  modeの設定  ;;;;;;;;
@@ -720,6 +702,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+    (quote
+      (visual-regexp-steroids visual-regexp)
+    )
+  )
 )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
